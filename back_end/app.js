@@ -27,6 +27,8 @@ app.post('/signin', (req,res)=>{
         
 });
 
+//teste
+
 app.get('/teste', (req,res) =>{
     contacts.findByEmail.url += 'bh@hubspot.com/profile';
     request(contacts.findByEmail, function (error, response, body) {
