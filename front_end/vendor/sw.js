@@ -1,8 +1,8 @@
 const staticCacheName = 'site-static-v2';
 const dynamicCacheName = 'site-dynamic-v1';
 const assets = [
-    '/',
-    '/index.html',
+    '../',
+    '../index.html',
     '/js/app.js',
     '/js/ui.js',
     '/js/materialize.min.js',
@@ -11,6 +11,7 @@ const assets = [
     '/img/dish.png',
     'https://fonts.googleapis.com/icon?family=Material+Icons',
     'https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
+    'https://gmgoamodcdcjnbaobigkjelfplakmdhh/include.preload.js.map',
     'chrome-extension://gmgoamodcdcjnbaobigkjelfplakmdhh/include.preload.js.map',
     '/pages/fallback.html'
 ];
