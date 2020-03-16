@@ -14,30 +14,38 @@ app.get('/', (req, res) =>{
 app.post('/signin', (req,res)=>{
 
         console.log(req.body.email);
+        let options =  contacts.findByEmail;
+        options.url += req.body.email + "/profile";
         var json
-        contacts.findByEmail.url += req.body.email + "/profile";
-        request(contacts.findByEmail, function (error, response, body) {
+        request(options, function (error, response, body) {
             if (error) throw new Error(error);
             json = JSON.parse(body);
             if(json.status === "error"){
-                res.send(json);
-            }else res.send(json.properties.firstname);
-
+                res.send(false);
+            }else res.send(true);
         });
-        
 });
 
-//teste 123
 
-app.get('/teste', (req,res) =>{
-    contacts.findByEmail.url += 'bh@hubspot.com/profile';
-    request(contacts.findByEmail, function (error, response, body) {
-        
+app.post('/signup', (req,res)=>{
+
+    let options = contacts.createContact;
+    options.body.properties[0].value = req.body.email;
+    options.body.properties[1].value = req.body.firstname;
+    options.body.properties[2].value = req.body.lastname;
+    options.body.properties[3].value = req.body.phone;
+    options.body.properties[4].value = req.body.address;
+    options.body.properties[5].value = req.body.city;
+    options.body.properties[6].value = req.body.zip;
+    for(let property of options.body.properties){
+        console.log(property.value);
+    }
+    request(options, function (error, response, body) {
         if (error) throw new Error(error);
-        var json = JSON.parse(body);
-        res.send(json.properties.firstname);
-        console.log(json.properties.firstname);
-    });
+      
+        console.log(body);
+      });
+
 
 });
 
