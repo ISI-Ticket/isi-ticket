@@ -18,6 +18,11 @@
     <link rel="apple-touch-icon" href="vendor/img/icons/icon-96x96.png">
     <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
     <meta name="theme-color" content="#FFE1C4">
+
+    <!-- Google shit-->
+	<meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="680946609407-a812c4bn4704j8u2n15lsud3hq19c3a5.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
 <body class="grey lighten-4">
@@ -31,8 +36,10 @@
                 <center>  <img style="width: 200px;" style="height: 200px;" src="vendor/img/logofinal2020.png" alt="Isi_Logo"></center>
             </span>
 
-            <div class="container">
-                <center> <button class="loginBtn loginBtn--google" onclick="window.location.href='vendor/pages/comprar.html'">
+            <div style = "margin-left: 38%; margin-top: 3%;" id="my-signin2"></div>
+
+            <!-- <div class="container">
+                <center> <button class="loginBtn loginBtn--google" data-onsuccess="onSignIn">
                         Login with Google
                       </button></center>
 
@@ -40,12 +47,13 @@
                         Login with Facebook
                       </button></center>
 
-            </div>
+            </div>-->
         </div>
     </div>
 
     <script src="vendor/js/app.js"></script>
     <script src="vendor/js/ui.js"></script>
+    <script src="vendor/js/signin.js"></script>
 
 </body>
 

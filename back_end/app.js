@@ -11,21 +11,52 @@ app.get('/', (req, res) =>{
     res.send('Hello word');
 });
 
-app.post('/signin', (req,res)=>{
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+  });
 
-        console.log(req.body.email);
+app.post('/signin', (req,res)=>{
+        
+        
+        console.log(req.body);
+        let data = {
+            exists : true,
+            email : req.body.email,
+            firstname : "",
+            lastname : "",
+            phone : "",
+            address : "",
+            city : "",
+            zip : ""
+        }
         let options =  contacts.findByEmail;
         options.url += req.body.email + "/profile";
         var json
         request(options, function (error, response, body) {
-            if (error) throw new Error(error);
+            
             json = JSON.parse(body);
             if(json.status === "error"){
-                res.send(false);
-            }else res.send(true);
+                data.exists = false;
+                res.send(data);
+            }else {
+                data.firstname = json.properties.firstname.value;
+                data.lastname = json.properties.lastname.value;
+                data.phone = json.properties.phone.value;
+                data.address = json.properties.address.value;
+                data.city = json.properties.city.value;
+                data.zip = json.properties.zip.value;
+                res.send(data);
+            };
         });
+      
 });
 
+
+app.post('/teste', (req,res) => {
+    console.log(req.body);
+    res.send(req.body);
+});
 
 app.post('/signup', (req,res)=>{
 

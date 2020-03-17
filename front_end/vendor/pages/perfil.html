@@ -17,6 +17,11 @@
     <link rel="apple-touch-icon" href="../img/icons/icon-96x96.png">
     <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
     <meta name="theme-color" content="#FFE1C4">
+
+    <!-- Google shit-->
+	<meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="680946609407-a812c4bn4704j8u2n15lsud3hq19c3a5.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
 <body class="grey lighten-4">
@@ -37,17 +42,29 @@
             <div class="divider"></div>
             <br>
             <br>
-            <h6>Número de Aluno:</h6>
-            <input type="text" placeholder="A86045" name="uname" required disabled>
+            <h6>E-mail</h6>
+            <input id="email" type="text" placeholder="" name="uname" required disabled>
             <br>
-            <h6>Nome:</h6>
-            <input type="text" placeholder="Antonio" name="uname" required disabled>
+            <h6>Nome</h6>
+            <input id="firstname" type="text" placeholder="" name="uname" required disabled>
             <br>
-            <h6>Apelido:</h6>
-            <input type="text" placeholder="Nogueira Pereira" name="uname" required disabled>
+            <h6>Apelido</h6>
+            <input id="lastname" type="text" placeholder="" name="uname" required disabled>
             <br>
-            <h6>Curso:</h6>
-            <input type="text" placeholder="MIEGSI" name="uname" required disabled>
+            <h6>Telemóvel</h6>
+            <input id="phone" type="text" placeholder="" name="uname" required disabled>
+            <br>
+            <h6>Endereço</h6>
+            <input id="address" type="text" placeholder="" name="uname" required disabled>
+            <br>
+            <h6>Cidade</h6>
+            <input id="city" type="text" placeholder="" name="uname" required disabled>
+            <br>
+            <h6>Código Postal</h6>
+            <input id="zip" type="text" placeholder="" name="uname" required disabled>
+            <br>
+            <br>
+            <a href="#" onclick="signOut();">Sign out</a>
         </div>
     </div>
 
@@ -64,7 +81,7 @@
 
     <script src="../js/app.jss"></script>
     <script src="../js/ui.js"></script>
-
+    <script src="../js/profile.js"></script>
 </body>
 
 </html>
