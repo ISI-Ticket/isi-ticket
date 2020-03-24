@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
-const contacts = require('../APIs/HubSpot/contacts');
+const contacts = require('../api_options/hubspot/contacts');
 
 router.post('/signin', (req,res)=>{
     console.log(req.body);
