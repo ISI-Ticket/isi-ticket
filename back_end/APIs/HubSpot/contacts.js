@@ -1,13 +1,14 @@
+const keys = require('./apiKeys.js');
 const findByEmail = { 
     method: 'GET',
     url: 'https://api.hubapi.com/contacts/v1/contact/email/',
-    qs: { hapikey: '36377dfd-2e67-4289-b531-a259c8a0aa5a' }
+    qs: { hapikey: keys.hubSpotKey }
 }
 
-const createContact = 
+const createUser = 
     { method: 'POST',
     url: 'https://api.hubapi.com/contacts/v1/contact/',
-    qs: { hapikey: '36377dfd-2e67-4289-b531-a259c8a0aa5a' },
+    qs: { hapikey: keys.hubSpotKey },
     headers: 
      { 
        'Content-Type': 'application/json' },
@@ -23,5 +24,5 @@ const createContact =
     json: true };
 
 exports.findByEmail = findByEmail;
-exports.createContact = createContact;
+exports.createUser = createUser;
 
