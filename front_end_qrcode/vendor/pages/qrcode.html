@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ISI TICKET</title>
+    <!-- materialize icons, css & js -->
+    <link type="text/css" href="../css/materialize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" href="../css/styles.css" rel="stylesheet">
+    <link href="../css/styles.css">
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+    <link rel="manifest" href="../manifest.json">
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="../img/icons/icon-96x96.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
+    <meta name="theme-color" content="#FFE1C4">
+</head>
+
+<body class="grey lighten-4">
+
+    <!-- top nav -->
+
+    <nav class="z-depth-0">
+        <div class="nav-wrapper container">
+            <a href="../pages/qrcode.html">ISI<span>TICKET</span></a>
+            <span class="right grey-text text-darken-1"></span>
+        </div>
+    </nav>
+
+
+    <!-- content -->
+    <div class="recipes container grey-text text-darken-1">
+        <div class="recipes container grey-text text-darken-1"></div>
+        <h5 class="center">Leitor QRCode</h5>
+        <div class="divider"></div>
+        <br>
+        <br>
+
+
+        <video width="85%" height="85%" id="preview"></video>
+        <script>
+            let scanner = new Instascan.Scanner({
+                video: document.getElementById('preview')
+            });
+            scanner.addListener('scan', function(content) {
+                alert('Escaneou o conteudo: ' + content);
+                window.open(content, "_blank");
+            });
+            Instascan.Camera.getCameras().then(cameras => {
+                if (cameras.length > 0) {
+                    scanner.start(cameras[0]);
+                } else {
+                    console.error("Não existe câmera no dispositivo!");
+                }
+            });
+        </script>
+
+        <br>
+        <br>
+
+    </div>
+    </div>
+
+
+    <script src="../js/app.jss"></script>
+    <script src="../js/ui.js"></script>
+
+
+
+</body>
+
+</html>
+
+<!--
+
+    <html>
+    <head>
+        <script type="text/javascript" src="qrcode.js"></script>
+    </head>
+    <body>
+        <input type="text" id="valor" value="">
+        <button onClick="createQrCode()">Gerar QR Code</button>
+        <div id="qrcode"></div>
+    </body>
+    <script>
+    
+    function createQrCode()
+    {
+        var userInput = document.getElementById('valor').value;
+
+        var qrcode = new QRCode("qrcode", {
+            text: userInput,
+            width: 256,
+            height: 256,
+            colorDark: "black",
+            colorLight: "white",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+    }
+    
+    </script>
+</html>
+-->
