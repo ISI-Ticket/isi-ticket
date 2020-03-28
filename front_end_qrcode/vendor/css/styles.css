@@ -1,0 +1,318 @@
+/* colours */
+
+:root {
+    --primary: #bd1e21;
+    /* BARRAS DE CIMA GRANDE */
+    --secondary: #F3E0DC;
+    /* BARRAS DE CIMA Fininha */
+    --title: #FFFFFF;
+    /* COR DO TITULO */
+}
+
+
+/* layout styles */
+
+nav {
+    background: var(--primary);
+    border-bottom: 10px solid var(--secondary);
+}
+
+nav a {
+    text-transform: uppercase;
+    color: var(--title);
+}
+
+nav a span {
+    font-weight: bold;
+}
+
+nav .sidenav-trigger {
+    margin: 0;
+}
+
+
+/* recipe styles */
+
+.recipes {
+    margin-top: 20px;
+}
+
+.card-panel.recipe {
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 1px 3px rgba(90, 90, 90, 0.1);
+    display: grid;
+    grid-template-columns: 2fr 6fr 1fr;
+    grid-template-areas: "image details delete";
+    position: relative;
+}
+
+.recipe img {
+    grid-area: image;
+    max-width: 60px;
+}
+
+.recipe-details {
+    grid-area: details;
+    margin-top: 6px;
+}
+
+.recipe-delete {
+    grid-area: delete;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.recipe-delete2 {
+    grid-area: delete;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.recipe-delete i {
+    font-size: 18px;
+}
+
+.recipe-delete2 i {
+    font-size: 40px;
+}
+
+.recipe-title {
+    font-weight: bold;
+    font-size: medium;
+}
+
+.recipe-ingredients {
+    font-size: small;
+    
+}
+
+
+/* form-styles */
+
+.add-btn {
+    background: var(--title) !important;
+}
+
+input {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+.side-form button {
+    background: var(--title);
+    box-shadow: 1px 1px 3px rgba(90, 90, 90, 0.2);
+}
+
+form .input-field {
+    margin-top: 30px;
+}
+
+
+/*BARRA NO FUNDO*/
+
+.navbarbot {
+    overflow: hidden;
+    background-color: #F3E0DC;
+    /* BARRAS DE BAIXO GRANDE  */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.navbarbot a {
+    float: left;
+    display: block;
+    color: #757575;
+    /* BARRAS DE BAIXO GRANDE */
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbarbot a:hover {
+    background: #F3E0DC;
+    color: black;
+}
+
+.navbarbot a.active {
+    background-color: #bd1e21;
+    /*BAIXO GRANDE ICON*/
+    color: white;
+}
+
+#inner {
+    display: table;
+    margin: 0 auto;
+    /* border: 1px solid black;*/
+}
+
+#outer {
+    width: 100%
+}
+
+
+/*LOGIN*/
+
+.centerDiv {
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 80%;
+    height: 60%;
+    margin: auto;
+    background-color: #f5f5f5;
+    /* LOGIN QUADRADO */
+}
+
+.fundo {
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    background-color: rgb(3, 22, 52);
+    /* LOGIN FUNDO */
+}
+
+
+/*Login Extra*/
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* Full-width input fields */
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+
+/* Set a style for all buttons */
+
+button {
+    background-color: rgb(205, 179, 128);
+    /*MUDAR COR DO BOTAO*/
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+}
+
+
+/* Change styles for span and cancel button on extra small screens */
+
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+
+/* Pagamento*/
+
+.centerDivPag {
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 80%;
+    height: 60%;
+    margin: auto;
+    background-color: rgba(232, 221, 203);
+}
+
+.classbuttton {
+    background-color: #FFFFFF;
+    border: 2px solid;
+    border-color: #757575;
+    color: #757575;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: auto;
+    cursor: pointer;
+    width: 40%;
+    left: 0;
+    right: 0;
+    position: fixed;
+}
+
+.iconify {
+    width: 50px;
+    height: 50px;
+}
+.placeholder {
+    border: 2px solid;
+    border-color: #757575;
+    opacity: 0.5;
+}
