@@ -26,7 +26,7 @@
 
 
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <meta http-equiv="Content-Security-Policy" content="default-src * gap:; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src *; img-src * data: blob: android-webview-video-poster:; style-src * 'unsafe-inline';">
 
 
@@ -55,22 +55,7 @@
 
         <center> <video width="95%" height="95%" id="preview"></video></center>
 
-        <script>
-            let scanner = new Instascan.Scanner({
-                video: document.getElementById('preview')
-            });
-            scanner.addListener('scan', function(content) {
-                alert('Escaneou o conteudo: ' + content);
-                window.open(content, "_blank");
-            });
-            Instascan.Camera.getCameras().then(cameras => {
-                if (cameras.length > 0) {
-                    scanner.start(cameras[0]);
-                } else {
-                    console.error("Não existe câmera no dispositivo!");
-                }
-            });
-        </script>
+        <script src= '../js/scanner.js'></script>
 
         <br>
         <br>
