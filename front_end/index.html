@@ -20,8 +20,9 @@
     <meta name="theme-color" content="#FFE1C4">
 
     <!-- Google shit-->
-	<meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="680946609407-a812c4bn4704j8u2n15lsud3hq19c3a5.apps.googleusercontent.com">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id"
+        content="680946609407-a812c4bn4704j8u2n15lsud3hq19c3a5.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
@@ -31,22 +32,30 @@
         <div class="centerDiv">
 
             <span class="login100-form-title p-b-48">
-            <h2 align="center" style="color:rgb(205,179,128);">Login</h2>
-            <span class="login100-form-title p-b-48">
-                <center>  <img style="width: 200px;" style="height: 200px;" src="vendor/img/logofinal2020.png" alt="Isi_Logo"></center>
-            </span>
+                <h2 align="center" style="color:rgb(205,179,128);">Login</h2>
+                <span class="login100-form-title p-b-48">
+                    <center> <img style="width: 200px;" style="height: 200px;" src="vendor/img/logofinal2020.png"
+                            alt="Isi_Logo"></center>
+                </span>
+                <div class="container">
+                    <center>
+                        <div  id="my-signin2"></div>
+                    </center>
+                    <br>
+                    <center>
+                        <div class="fb-login-button" data-width="" data-size="medium" data-button-type="login_with"
+                            data-layout="default" data-auto-logout-link="true" data-use-continue-as="false" data-onlogin="facebookLogin()"></div>
+                    </center>
+                </div>
 
-            <div style = "margin-left: 41%; margin-top: 3%;" id="my-signin2"></div>
+                <!--<button class="loginBtn loginBtn--facebook" onclick="facebookLogin()">
+                Login with Facebook
+            </button>-->
 
-            <!-- <div class="container">
+                <!-- <div class="container">
                 <center> <button class="loginBtn loginBtn--google" data-onsuccess="onSignIn">
                         Login with Google
                       </button></center>
-
-                <center> <button class="loginBtn loginBtn--facebook" onclick="window.location.href='vendor/pages/comprar.html'">
-                        Login with Facebook
-                      </button></center>
-
             </div>-->
         </div>
     </div>
