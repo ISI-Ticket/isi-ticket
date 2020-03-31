@@ -2,8 +2,7 @@ let scanner = new Instascan.Scanner({
     video: document.getElementById('preview')
 });
 scanner.addListener('scan', function(content) {
-    alert('Escaneou o conteudo: ' + content);
-    window.open(content, "_blank");
+    validateTicket(content);
 });
 Instascan.Camera.getCameras().then(cameras => {
     if (cameras.length > 0) {
@@ -15,8 +14,10 @@ Instascan.Camera.getCameras().then(cameras => {
 
 
 function validateTicket(content){
-    let teste = content.substr(0, addy.indexOf('/'));
-    console.log(teste);
+    let saleID = content.substr(0, content.indexOf('/'));
+    let ticketID = content.substr(content.indexOf('/') + 1);
+    let data = {saleID, ticketID};
+    console.log(data);
     fetch('http://localhost:5000/ticket/validate',{
         headers: {'Content-Type': 'application/json'},
         method: 'POST',
@@ -24,19 +25,29 @@ function validateTicket(content){
         body: JSON.stringify(data)
         }).then(function(res){ return res.json(); 
         }).then(function(data){
-            console.log(JSON.stringify(data));
-            let response = JSON.stringify(data);
-            
+            console.log(data);
+            showPopup(data);            
         });
 
 
+}
 
-    Swal.fire({
-        title: 'Senha validada com sucesso!',
-        text: 'Modal with a custom image.',
-        imageUrl: '../img/blueticket.png',
-        imageWidth: 400,
-        imageHeight: 200
-      })
 
+function showPopup(response){
+    console.log(response.status);
+    if(response.status == false){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Senha validada previamente!',
+          })
+    }else{
+        Swal.fire({
+            title: 'Sucesso!',
+            text: response.msg,
+            imageUrl: '../img/blueticket.png',
+            imageWidth: 200,
+            imageHeight: 200
+        })
+    }
 }

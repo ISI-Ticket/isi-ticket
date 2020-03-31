@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/validate', (req,res) =>{
-    let query = connection.query('UPDATE Sales SET status = ? WHERE saleID = ? and ticketID = ?', [0, req.body.salesID, req.body.ticketID], function (error, results, fields) {
+    let query = connection.query('UPDATE Sales SET status = ? WHERE saleID = ? and ticketID = ?', [0, req.body.saleID, req.body.ticketID], function (error, results, fields) {
         if (error) throw error;
         console.log(query.sql);
         console.log(results.changedRows);
@@ -13,13 +13,19 @@ router.post('/validate', (req,res) =>{
 })
 
 function handleResponse(rows, ticketID){
+  let data, status;
     if(rows == 0 ){
-      return false;
+      status = false;
+      data = {status}
+      return data;
     }else{
+      status = true;
       let ticket = checkTicket(ticketID);
       let msg = ticket + ' validada com sucesso!';
-      let data = {
-        ticket, msg
+      data = {
+        status,
+        ticket, 
+        msg
       }
       return data;
     }
@@ -31,18 +37,14 @@ function handleResponse(rows, ticketID){
 
 function checkTicket(ticketID){
   switch(ticketID){
-    case 1:
-      return "Senha simples";
-      break;
-    case 2:
+    case '1':
+      return "Senha simples";  
+    case '2':
       return "Senha completa";
-      break;
-    case 3:
+    case '3':
       return "Senha Grill";
-      break;
-    case 4:
-      return "Senha Rampa B";
-      break;       
+    case '4':
+      return "Senha Rampa B";       
   }
 
 }
