@@ -4,7 +4,6 @@ const request = require('request');
 const contacts = require('../api_options/hubspot/contacts');
 
 router.post('/signin', (req,res)=>{
-    console.log(req.body);
     let data = {
         exists : true,
         email : req.body.email,
@@ -30,6 +29,7 @@ router.post('/signin', (req,res)=>{
             data.address = json.properties.address.value;
             data.city = json.properties.city.value;
             data.zip = json.properties.zip.value;
+            console.log(data);
             res.send(data);
         };
     }); 
