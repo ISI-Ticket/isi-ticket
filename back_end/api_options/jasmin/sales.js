@@ -1,6 +1,7 @@
+const credentials = require('../../imp_info/jasmin_org')
 const getInvoices = { 
     method: 'GET',
-    url: 'https://my.jasminsoftware.com/api/233988/233988-0001/sales/orders',
+    url: `https://my.jasminsoftware.com/api/${credentials.tenant}/${credentials.org}/sales/orders`,
     headers: { 
        'Authorization' : '',
        'Content-Type' : 'application/json'

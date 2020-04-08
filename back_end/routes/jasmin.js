@@ -20,15 +20,13 @@ var access_token = '';
 router.get('/getInvoices', (req,res) =>{
     loginJasmin();
     console.log(access_token);
-    let json = '';
     let options = sales_options.getInvoices;
     options.headers.Authorization = access_token;
     console.log(options);
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
-        json = JSON.parse(body);
-        console.log(json);
-        res.send('teste');
+        console.log(body);
+        res.send(body);
     });
 });
 
