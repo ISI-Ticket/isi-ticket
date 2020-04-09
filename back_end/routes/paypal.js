@@ -12,8 +12,9 @@ paypal.configure({
 
 
 router.post('/pay', (req,res)=>{
-    req.body
-    paypal.payment.create(paypalOptions.paymentJSON, function (error, payment) {
+    let options = paypalOptions.paymentJSON;
+    options = setOptions(options, req.body);
+    paypal.payment.create(options, function (error, payment) {
         if (error) {
             throw error;
         } else {
@@ -26,20 +27,76 @@ router.post('/pay', (req,res)=>{
     });
 });
 
-router.get('/success', (req, res) => {
+router.get('/success/:total', (req, res) => {
     const payerID = req.query.PayerID;
     const paymentID = req.query.paymentId;
+    let total = req.params.total;
     let executePayment = paypalOptions.exePayment;
     executePayment.payer_id = payerID;
+    executePayment.transactions[0].amount.total = total;
+    console.log(total);
     paypal.payment.execute(paymentID, executePayment, function (error, payment) {
       if (error) {
           console.log(error.response);
           throw error;
       } else {
-          console.log(JSON.stringify(payment));
-          res.redirect('http://127.0.0.1:5500/isi-ticket/front_end/vendor/pages/comprar.html');
+          //console.log(JSON.stringify(payment));
+          res.redirect('http://127.0.0.1:5500/isi-ticket/front_end/vendor/pages/carteira.html');
       }
   });
   });
+
+
+function setOptions(options, body){
+    let items = options.transactions[0].item_list.items;
+    let date = new Date();
+    let quantity = body.quantity;
+    let add = 0;
+    ticketID = body.ticketID;
+    for(let i = 0; i < options.transactions[0].item_list.items.length; i++){
+        switch(ticketID){
+            case '1' :
+                items[i].name = "Senha simples";
+                items[i].sku = "001";
+                items[i].price = (2.05 * quantity).toString();
+                items[i].currency = "EUR";
+                items[i].quantity = quantity;
+                add += 2.05 * quantity;
+                break;
+            case '2' :
+                items[i].name = "Senha completa";
+                items[i].sku = "002";
+                items[i].price = (2.75 * quantity).toString();
+                items[i].currency = "EUR";
+                items[i].quantity = quantity
+                add += 2.75 * quantity;
+                break;
+            case '3' :
+                items[i].name = "Senha grill";
+                items[i].sku = "003";
+                items[i].price = (5.50 * quantity).toString();
+                items[i].currency = "EUR";
+                items[i].quantity = quantity
+                add += 5.50 * quantity;
+                break;
+            case '4' :
+                items[i].name = "Senha rampa B";
+                items[i].sku = "004";
+                items[i].price = (4.05 * quantity).toString();
+                items[i].currency = "EUR";
+                items[i].quantity = quantity
+                add += 4.05 * quantity;
+                break;
+          }
+        
+    }
+    options.transactions[0].description = `Compra feita com sucesso no dia ${date}`;
+    let total = parseFloat(options.transactions[0].amount.total) + add;
+    options.transactions[0].amount.total = total.toString();
+    console.log(options.transactions[0]);
+    options.redirect_urls.return_url = `http://127.0.0.1:5000/paypal/success/${total.toString()}`
+    return options;
+}
+
 
   module.exports = router;

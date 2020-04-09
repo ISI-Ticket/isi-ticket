@@ -4,22 +4,22 @@ const paymentJSON = {
         "payment_method": "paypal"
     },
     "redirect_urls": {
-        "return_url": "http://127.0.0.1:5000/paypal/success",
+        "return_url": "",
         "cancel_url": "http://127.0.0.1:5500/isi-ticket/front_end/vendor/pages/comprar.html"
     },
     "transactions": [{
         "item_list": {
             "items": [{
-                "name": "Senha simples",
-                "sku": "001",
-                "price": "25.00",
+                "name": "",
+                "sku": "",
+                "price": "",
                 "currency": "EUR",
-                "quantity": 1
+                "quantity": ""
             }]
         },
         "amount": {
             "currency": "EUR",
-            "total": "25.00"
+            "total": "0"
         },
         "description": "This is the payment description."
     }]
@@ -30,7 +30,7 @@ const exePayment = {
     "transactions": [{
         "amount": {
             "currency": "EUR",
-            "total": "25"
+            "total": "2.05"
         }
     }]
   };
