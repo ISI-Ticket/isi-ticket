@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
-const auth_options = require('../api_options/jasmin/auth');
-const sales_options = require('../api_options/jasmin/sales');
+const auth_options = require('../api_options/jasmin/authOpt');
+const sales_options = require('../api_options/jasmin/salesOpt');
 var access_token = '';
 
  function loginJasmin(){
@@ -29,6 +29,9 @@ router.get('/getInvoices', (req,res) =>{
         res.send(body);
     });
 });
+
+
+
 
 router.get('/login', (req,res) =>{
     loginJasmin();

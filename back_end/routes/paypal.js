@@ -10,7 +10,6 @@ paypal.configure({
 });
 
 
-
 router.post('/pay', (req,res)=>{
     let options = paypalOptions.paymentJSON;
     options = setOptions(options, req.body);
@@ -34,7 +33,6 @@ router.get('/success/:total', (req, res) => {
     let executePayment = paypalOptions.exePayment;
     executePayment.payer_id = payerID;
     executePayment.transactions[0].amount.total = total;
-    console.log(total);
     paypal.payment.execute(paymentID, executePayment, function (error, payment) {
       if (error) {
           console.log(error.response);
@@ -45,6 +43,7 @@ router.get('/success/:total', (req, res) => {
       }
   });
   });
+
 
 
 function setOptions(options, body){
