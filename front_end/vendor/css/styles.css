@@ -86,7 +86,6 @@ nav .sidenav-trigger {
 
 .recipe-ingredients {
     font-size: small;
-    
 }
 
 
@@ -307,10 +306,25 @@ button:hover {
     position: fixed;
 }
 
+.classbuttton2 {
+    background-color: #FFFFFF;
+    border: 2px solid;
+    border-color: #757575;
+    color: #757575;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: auto;
+    cursor: pointer;
+}
+
 .iconify {
     width: 50px;
     height: 50px;
 }
+
 .placeholder {
     border: 2px solid;
     border-color: #757575;
