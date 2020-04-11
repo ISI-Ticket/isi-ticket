@@ -1,4 +1,4 @@
-function paypal() {
+function pay() {
   var data = {
       ticketID : document.getElementById('ticketID').value,
       quantity : 1
@@ -13,6 +13,4 @@ function paypal() {
       window.location.href = res.url;
       //return res.json();
   })
-
-
 }

@@ -105,7 +105,7 @@ function setOptions(options, body){
         
     }
     options.transactions[0].description = `Compra feita com sucesso no dia ${date}`;
-    let total = parseFloat(options.transactions[0].amount.total) + add;
+    let total = add;
     options.transactions[0].amount.total = total.toString();
     console.log(options.transactions[0]);
     options.redirect_urls.return_url = `http://127.0.0.1:5000/paypal/success/${total.toString()}`

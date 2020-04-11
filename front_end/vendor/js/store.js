@@ -4,6 +4,8 @@ if (document.readyState == 'loading') {
     ready()
 }
 
+
+
 function ready() {
     var removeCartItemButtons = document.getElementsByClassName('btn-danger')
     for (var i = 0; i < removeCartItemButtons.length; i++) {
@@ -28,14 +30,7 @@ function ready() {
     document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
 }
 
-function purchaseClicked() {
-    alert('Thank you for your purchase')
-    var cartItems = document.getElementsByClassName('cart-items')[0]
-    while (cartItems.hasChildNodes()) {
-        cartItems.removeChild(cartItems.firstChild)
-    }
-    updateCartTotal()
-}
+
 
 function removeCartItem(event) {
     var buttonClicked = event.target
@@ -55,8 +50,9 @@ function addToCartClicked(event) {
     var button = event.target
     var shopItem = button.parentElement.parentElement
     var title = shopItem.getElementsByClassName('recipe-title')[0].innerText
-        // var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText
     var price = shopItem.getElementsByClassName('recipe-ingredients')[0].innerText
+    //var ticketID = shopItem.getElementsByClassName('recipe-ingredients')[1].innerText
+    //console.log(ticketID)
     addItemToCart(title, price)
     updateCartTotal()
 }
@@ -72,6 +68,29 @@ function addItemToCart(title, price) {
             return
         }
     }
+    let ticketID = 0;
+
+    switch(title){
+        case("Senha Simples"):
+            ticketID = 1;
+            break;
+        case("Senha Completa"):
+            ticketID = 2;
+            break;
+        case("Senha Rampa B"):
+            ticketID = 4;
+            break;
+        case("Senha Grill"):
+            ticketID = 3;
+            break;
+        case("Pack de Senhas"):
+            ticketID = 5;
+            break;
+        default:
+            ticketID = 1;
+            break;
+    }
+
     var cartRowContents = `
         <div class="cart-item cart-column">
             <span class="cart-item-title">${title}</span>
@@ -79,6 +98,8 @@ function addItemToCart(title, price) {
         <span class="cart-price cart-column">${price}</span>
         <div class="cart-quantity cart-column">
             <input class="cart-quantity-input" type="number" value="1">
+            <input class="cart-quantity-input" type="hidden" value=${ticketID}>
+            
             <button class="btn btn-danger" type="button">REMOVE</button>
         </div>`
     cartRow.innerHTML = cartRowContents
@@ -88,6 +109,8 @@ function addItemToCart(title, price) {
 }
 
 function updateCartTotal() {
+    var cartItems = document.getElementsByClassName('cart-items')[0]
+    var cartItemNames = cartItems.getElementsByClassName('cart-item-title')
     var cartItemContainer = document.getElementsByClassName('cart-items')[0]
     var cartRows = cartItemContainer.getElementsByClassName('cart-row')
     var total = 0
@@ -99,6 +122,48 @@ function updateCartTotal() {
         var quantity = quantityElement.value
         total = total + (price * quantity)
     }
+
+
     total = Math.round(total * 100) / 100
-    document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
+    document.getElementsByClassName('cart-total-price')[0].innerText = '€' + total
 }
+
+
+function getItems(){
+    let cart = {
+        items:[]
+    }
+    var cartItems = document.getElementsByClassName('cart-items')[0]
+    var cartItemContainer = document.getElementsByClassName('cart-items')[0]
+    var cartRows = cartItemContainer.getElementsByClassName('cart-row')
+    for (var i = 0; i < cartRows.length; i++) {
+        let cartRow = cartRows[i]
+        let ticketID = cartRow.getElementsByClassName('cart-quantity-input')[1].value;
+        let quantity = cartRow.getElementsByClassName('cart-quantity-input')[0].value;
+        let item = {ticketID, quantity}
+        cart.items.push(item);
+    }
+
+    console.log(JSON.stringify(cart));
+    pay(cart);
+
+}
+
+
+function pay(cart) {
+    var data = {
+        ticketID : "1",
+        quantity : 1
+    }
+    console.log(data);
+    fetch('http://localhost:5000/paypal/pay', {
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        body: JSON.stringify(data)
+    }).then(function (res) {
+        console.log(res.url);
+        window.location.href = res.url;
+        //return res.json();
+    })
+  }
+  
