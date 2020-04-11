@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const request = require('request');
 const auth_options = require('../api_options/jasmin/authOpt');
-const sales_options = require('../api_options/jasmin/salesOpt');
+const sales_options = require('../api_options/jasmin/invoiceOpt');
 var access_token = '';
 
  function loginJasmin(){

@@ -3,6 +3,10 @@ const router = express.Router();
 const paypal = require('paypal-rest-sdk');
 const paypalAuth = require('../imp_info/paypal_auth');
 const paypalOptions = require('../api_options/paypal/payment')
+const hubspot = require('../services/hubspot/user');
+const jasmin = require('../services/jasmin/costumer')
+const invoice = require('../services/jasmin/invoice');
+
 paypal.configure({
     'mode': 'sandbox', //sandbox or live
     'client_id': paypalAuth.clientID,
@@ -38,7 +42,18 @@ router.get('/success/:total', (req, res) => {
           console.log(error.response);
           throw error;
       } else {
-          //console.log(JSON.stringify(payment));
+          let items = payment.transactions[0].item_list.items;
+          hubspot.findUserByEmail(payment.payer.payer_info.email).then((user) =>{
+            jasmin.findCostumer(user.nif).then((costumer) => {
+                  if(costumer.customerPartyKey != null){
+                    invoice.create(costumer.customerPartyKey,items).then((seriesNUM) => { console.log(seriesNUM)})
+                  }else{
+                    jasmin.createCostumer(user).then((costumerKey) => {
+                        invoice.create(costumerKey,items).then((seriesNUM) => { console.log(seriesNUM)})
+                    });
+                  }
+              })
+          })
           res.redirect('http://127.0.0.1:5500/isi-ticket/front_end/vendor/pages/carteira.html');
       }
   });
