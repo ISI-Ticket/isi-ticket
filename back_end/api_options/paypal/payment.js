@@ -9,13 +9,7 @@ const paymentJSON = {
     },
     "transactions": [{
         "item_list": {
-            "items": [{
-                "name": "",
-                "sku": "",
-                "price": "",
-                "currency": "EUR",
-                "quantity": ""
-            }]
+            "items": []
         },
         "amount": {
             "currency": "EUR",

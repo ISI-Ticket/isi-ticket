@@ -139,7 +139,8 @@ function getItems(){
     for (var i = 0; i < cartRows.length; i++) {
         let cartRow = cartRows[i]
         let ticketID = cartRow.getElementsByClassName('cart-quantity-input')[1].value;
-        let quantity = cartRow.getElementsByClassName('cart-quantity-input')[0].value;
+        let quantityString = cartRow.getElementsByClassName('cart-quantity-input')[0].value;
+        let quantity = parseInt(quantityString);
         let item = {ticketID, quantity}
         cart.items.push(item);
     }
@@ -151,15 +152,10 @@ function getItems(){
 
 
 function pay(cart) {
-    var data = {
-        ticketID : "1",
-        quantity : 1
-    }
-    console.log(data);
     fetch('http://localhost:5000/paypal/pay', {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
-        body: JSON.stringify(data)
+        body: JSON.stringify(cart)
     }).then(function (res) {
         console.log(res.url);
         window.location.href = res.url;

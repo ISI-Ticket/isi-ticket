@@ -15,10 +15,12 @@ paypal.configure({
 
 
 router.post('/pay', (req,res)=>{
+    console.log(req.body)
     let options = paypalOptions.paymentJSON;
-    options = setOptions(options, req.body);
+    options = setOptions(options,req.body);
     paypal.payment.create(options, function (error, payment) {
         if (error) {
+            console.log(JSON.stringify(error))
             throw error;
         } else {
            for(let i = 0; i < payment.links.length; i++){
@@ -61,7 +63,7 @@ router.get('/success/:total', (req, res) => {
 
 
 
-function setOptions(options, body){
+/*function setOptions(options, body){
     let items = options.transactions[0].item_list.items;
     let date = new Date();
     let quantity = body.quantity;
@@ -110,7 +112,70 @@ function setOptions(options, body){
     console.log(options.transactions[0]);
     options.redirect_urls.return_url = `http://127.0.0.1:5000/paypal/success/${total.toString()}`
     return options;
+}*/
+
+
+function setOptions(options, cart){
+    let items = [];
+
+    let date = new Date();
+    let add = 0;
+    for(item of cart.items){
+        let itemObj = {
+            name: "",
+            sku: "",
+            price: "",
+            currency: "EUR",
+            quantity: ""
+        }
+        switch(item.ticketID){
+            case '1' :
+                itemObj.name = "Senha simples";
+                itemObj.sku = "001";
+                itemObj.price = "2.05"
+                itemObj.currency = "EUR";
+                itemObj.quantity = item.quantity;
+                add += +(2.05 * item.quantity).toFixed(2);
+                items.push(itemObj);
+                break;
+            case '2' :
+                itemObj.name = "Senha completa";
+                itemObj.sku = "002";
+                itemObj.price = "2.75"
+                itemObj.currency = "EUR";
+                itemObj.quantity = item.quantity
+                add += +(2.75 * item.quantity).toFixed(2);
+                items.push(itemObj);
+                break;
+            case '3' :
+                itemObj.name = "Senha grill";
+                itemObj.sku = "003";
+                itemObj.price = "5.50"
+                itemObj.currency = "EUR";
+                itemObj.quantity = item.quantity
+                add += +(5.50 * item.quantity).toFixed(2);
+                items.push(itemObj);
+                break;
+            case '4' :
+                itemObj.name = "Senha rampa B";
+                itemObj.sku = "004";
+                itemObj.price = "4.05"
+                itemObj.currency = "EUR";
+                itemObj.quantity = item.quantity
+                add += +(4.05 * item.quantity).toFixed(2);;
+                items.push(itemObj);
+                break;
+          }
+    }
+    options.transactions[0].item_list.items = items;
+    options.transactions[0].description = `Compra feita com sucesso no dia ${date}`;
+    let total = add;
+    options.transactions[0].amount.total = total.toString();
+    options.redirect_urls.return_url = `http://127.0.0.1:5000/paypal/success/${total.toString()}`
+    //console.log(JSON.stringify(options));
+    return options;
 }
+
 
 
   module.exports = router;
