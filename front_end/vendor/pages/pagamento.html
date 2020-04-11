@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -17,7 +16,10 @@
     <link rel="apple-touch-icon" href="../img/icons/icon-96x96.png">
     <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
     <meta name="theme-color" content="#FFE1C4">
-    <script src = '../js/payment.js'></script>
+    <script src='../js/payment.js'></script>
+    <link rel="stylesheet" href="../css/style2.css" />
+
+    <script src="../js/store.js" async></script>
 </head>
 
 <body class="grey lighten-4">
@@ -31,7 +33,7 @@
     </nav>
 
     <!-- meio -->
-    <input type="hidden" id = 'ticketID' value = 1>
+    <input type="hidden" id='ticketID' value=1>
 
     <div class="recipes container grey-text text-darken-1">
         <div class="recipes container grey-text text-darken-1">
@@ -39,24 +41,125 @@
             <div class="divider"></div>
             <br>
             <br>
+            <!-- senha-->
             <div class="card-panel recipe white row" style="height:250px;">
                 <img src="../img/yellowticket.png" alt="recipe thumb">
                 <div class="recipe-details">
                     <div class="recipe-title" style="font-size:medium;">Senha Simples</div>
                     <br>
-                    <div class="recipe-ingredients" style="font-size: small;">Preço : 2,05 € </div>
+                    <p>Preço : </p>
+                    <div class="recipe-ingredients" style="font-size: small;">2.05</div>
                     <br>
-                    <div class="recipe-ingredients" style="font-size: small;">Método de Pagamento:</div>
-                    <br>
-                    <br>
-
-                    <button class="classbuttton" onclick="paypal()">PAYPALL</button>
+                    <button class="classbuttton2" type="button">Adicionar ao Carrinho</button>
                 </div>
                 <br>
                 <br>
-
             </div>
+            <!-- senha-->
+
+            <!-- senha Grill-->
+            <div class="card-panel recipe white row" style="height:250px;">
+                <img src="../img/purpleticket.png" alt="recipe thumb">
+                <div class="recipe-details">
+                    <div class="recipe-title" style="font-size:medium;">Senha Grill</div>
+                    <br>
+                    <p>Preço : </p>
+                    <div class="recipe-ingredients" style="font-size: small;">5.50</div>
+                    <br>
+                    <button class="classbuttton2" type="button">Adicionar ao Carrinho</button>
+                </div>
+                <br>
+                <br>
+            </div>
+            <!-- senha-->
+
+            <!-- senha Completa-->
+            <div class="card-panel recipe white row" style="height:250px;">
+                <img src="../img/yellowticket.png" alt="recipe thumb">
+                <div class="recipe-details">
+                    <div class="recipe-title" style="font-size:medium;">Senha Simples</div>
+                    <br>
+                    <p>Preço : </p>
+                    <div class="recipe-ingredients" style="font-size: small;">2.05</div>
+                    <br>
+                    <button class="classbuttton2" type="button">Adicionar ao Carrinho</button>
+                </div>
+                <br>
+                <br>
+            </div>
+            <!-- senha-->
+
+            <!-- senha Rampa B-->
+            <div class="card-panel recipe white row" style="height:250px;">
+                <img src="../img/orangeticket.png" alt="recipe thumb">
+                <div class="recipe-details">
+                    <div class="recipe-title" style="font-size:medium;">Senha Rampa B</div>
+                    <br>
+                    <p>Preço : </p>
+                    <div class="recipe-ingredients" style="font-size: small;">4.05</div>
+                    <br>
+                    <button class="classbuttton2" type="button">Adicionar ao Carrinho</button>
+                </div>
+                <br>
+                <br>
+            </div>
+            <!-- senha-->
+
+            <!-- Pack de Senhas-->
+            <div class="card-panel recipe white row" style="height:250px;">
+                <img src="../img/blueticket.png" alt="recipe thumb">
+                <div class="recipe-details">
+                    <div class="recipe-title" style="font-size:medium;">Pack de Senhas</div>
+                    <br>
+                    <p>Preço : </p>
+                    <div class="recipe-ingredients" style="font-size: small;">26.50</div>
+                    <br>
+                    <button class="classbuttton2" type="button">Adicionar ao Carrinho</button>
+                </div>
+                <br>
+                <br>
+            </div>
+            <!-- senha-->
         </div>
+    </div>
+    <div class="recipes container grey-text text-darken-1">
+        <div class="recipes container grey-text text-darken-1">
+            <h5 class="center">Carteira</h5>
+            <div class="cart-row">
+                <span class="cart-item cart-header cart-column">ITEM</span>
+                <span class="cart-price cart-header cart-column">PREÇO</span>
+                <span class="cart-quantity cart-header cart-column">QUANTIDADE</span>
+            </div>
+            <div class="cart-items">
+            </div>
+            <div class="cart-total">
+                <strong class="cart-total-title">Total</strong>
+                <span class="cart-total-price">€0</span>
+            </div>
+            <button class="btn btn-primary btn-purchase" type="button">COMPRAR</button>
+        </div>
+    </div>
+
+    <!--
+
+            <section class="container content-section">
+                <div class="cart-row">
+                    <span class="cart-item cart-header cart-column">ITEM</span>
+                    <span class="cart-price cart-header cart-column">PREÇO</span>
+                    <span class="cart-quantity cart-header cart-column">QUANTIDADE</span>
+                </div>
+                <div class="cart-items">
+                </div>
+                <div class="cart-total">
+                    <strong class="cart-total-title">Total</strong>
+                    <span class="cart-total-price">€0</span>
+                </div>
+                <button class="btn btn-primary btn-purchase" type="button">COMPRAR</button>
+            </section>
+
+-->
+
+    </div>
     </div>
 
     <!-- bot nav-->
@@ -72,7 +175,7 @@
 
     <script src="../js/app.js"></script>
     <script src="../js/ui.js"></script>
-    
+
 </body>
 
 </html>
