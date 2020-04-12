@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" href="../css/styles.css" rel="stylesheet">
     <link href="../css/styles.css">
+    <link rel="stylesheet" href="../css/modal.css">
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <link rel="manifest" href="../manifest.json">
     <!-- ios support -->
@@ -18,6 +19,7 @@
     <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
     <meta name="theme-color" content="#FFE1C4">
     <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
+    <script src = "../js/getTickets.js"></script>
 </head>
 
 <body class="grey lighten-4">
@@ -32,32 +34,22 @@
 
     <!-- recipes -->
     <div class="recipes container grey-text text-darken-1">
-        <div class="recipes container grey-text text-darken-1">
+        <div class="recipes container grey-text text-darken-1" id="render">
             <h5 class="center">Senhas Compradas</h5>
             <div class="divider"></div>
             <br>
             <br>
-            <div class="card-panel recipe white row">
-                <img src="../img/greenticket.png" alt="recipe thumb">
-                <div class="recipe-details">
-                    <div class="recipe-title">Senha Completa</div>
-                    <div class="recipe-ingredients">2,75 €</div>
-                </div>
-                <div class="recipe-delete">
-                    <span class="iconify" data-icon="mdi-qrcode-scan" data-inline="false" onclick="window.location.href='../pages/usarsenha.html'"></span>
-                    <!-- <button type="submit" onclick="window.location.href='/pages/usarsenha.html'">Ativar</button> -->
-                </div>
-            </div>
         </div>
     </div>
+
 
     <!-- bot nav-->
     <div id="outer" class="navbarbot">
         <div id="inner">
-            <a href="../pages/perfil.html" class="active"><i class="material-icons">account_box</i></a>
+            <a href="../pages/perfil.html"><i class="material-icons">account_box</i></a>
             <a href="../pages/sobre.html"><i class="material-icons">contact_support</i></a>
-            <a href="../pages/comprar.html"><i class="material-icons">playlist_add</i></a>
-            <a href="../pages/carteira.html"><i class="material-icons">playlist_add_check</i></a>
+            <a href="../pages/pagamento.html"><i class="material-icons">playlist_add</i></a>
+            <a href="../pages/carteira.html" class="active"><i class="material-icons">playlist_add_check</i></a>
             <a href="../pages/historico.html"><i class="material-icons">format_list_bulleted</i></a>
         </div>
     </div>

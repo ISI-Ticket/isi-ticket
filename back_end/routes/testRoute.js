@@ -4,6 +4,7 @@ const sales = require('../services/jasmin/costumer');
 const invoice = require('../services/jasmin/invoice');
 const authOpt = require('../api_options/jasmin/authOpt');
 const request = require('request');
+const saleDB = require('../dbQueries/saleDB');
 let token;
 /*router.use(function (req, res, next) {
     let json;
@@ -24,18 +25,9 @@ router.post('/createCustomer', (req,res) =>{
     res.send("sim");
 })
 
-router.get('/test', (req,res) =>{
-    /*let data = {
-        compras:
-        [{
-            "ticketID" : 1, "quantity" : 2
-        },
-        {
-            "ticketID" : 2, "quantity" : 2
-        }
-        ]
-    }*/
-    
+router.get('/test/:clientID', (req,res) =>{
+    saleDB.select(req.params.clientID, res);
+   
 });
 
 
