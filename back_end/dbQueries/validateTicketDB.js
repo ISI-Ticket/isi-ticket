@@ -1,4 +1,4 @@
-const connection = require('../imp_info/connection');
+const connection = require('../config/connection');
 
 
 const getQuantity = (clientID, ticketID, reference, res) =>{

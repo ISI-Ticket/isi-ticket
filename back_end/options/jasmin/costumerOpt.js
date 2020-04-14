@@ -1,4 +1,4 @@
-const jasminOrg = require('../../imp_info/jasmin_org')
+const jasminOrg = require('../../config/jasmin_org')
 const getCostumer = (nif, token) => {
     let options = {
     method : 'GET',

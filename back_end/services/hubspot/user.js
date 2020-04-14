@@ -1,5 +1,5 @@
 const request = require('request');
-const hubspot = require('../../api_options/hubspot/contactsOpt');
+const hubspot = require('../../options/hubspot/contactsOpt');
 
 const findUserByEmail = (email)=> {
     return new Promise((resolve,reject) =>{

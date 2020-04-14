@@ -1,24 +1,14 @@
 const connection = require('../config/connection');
 
-
-const insert = (clientID, date, items, reference) =>{
-    let sql = 'INSERT INTO Sale (date, quantity, ticketID, clientID, reference, qtyObtained) VALUES ?'
-    let records = prepareEntry(items, clientID, date, reference);
-    console.log(records);
-    var query = connection.query(sql, [records], function(err, result) {
-        console.log(err);
-    });
-}
-
-
 const select = (clientID, res) =>{
-    let sql = "SELECT date, quantity, ticketID, clientID, reference FROM Sale WHERE quantity != 0 and clientID = ?"
+    let sql = "SELECT date, ticketID, clientID, reference, qtyObtained FROM Sale WHERE clientID = ?"
     var query = connection.query(sql, parseInt(clientID), function (error, results, fields) {
             let rows = JSON.parse(JSON.stringify(results))
             res.send(prepareResponse(rows));
       });
       console.log(query.sql);
 }
+
 
 function prepareResponse(rows){
     let data = [];
@@ -27,7 +17,7 @@ function prepareResponse(rows){
             ticketID : row.ticketID,
             ticketName : '',
             description : '',
-            quantity : row.quantity,
+            quantity : row.qtyObtained,
             date : row.date,
             reference : row.reference
         }
@@ -57,21 +47,5 @@ function prepareResponse(rows){
     //console.log(data);
     return data;
 }
-function prepareEntry(items, clientID, date, reference){
-    let records = []
-    for(item of items){
-        let sale = [];
-        sale.push(date);
-        sale.push(item.quantity);
-        ticketID = parseInt(item.sku);
-        sale.push(ticketID);
-        sale.push(parseInt(clientID));
-        sale.push(reference);
-        sale.push(item.quantity);
-        records.push(sale);
-    }
-    return records;
-}
 
-exports.insert = insert;
 exports.select = select;

@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 app.use('/jasmin', require('./routes/jasmin'));
 app.use('/user', require('./routes/userRoute.js'));
 app.use('/moloni', require('./routes/moloni.js'));
-app.use('/ticket', require('./routes/validateTicket.js'));
+app.use('/employee', require('./routes/validateTicket.js'));
 app.use('/paypal', require('./routes/paypal.js'));
 app.use('/test', require('./routes/testRoute'));
 

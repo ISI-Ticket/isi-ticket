@@ -1,5 +1,5 @@
 const request = require('request');
-const costumerOpt = require('../../api_options/jasmin/costumerOpt');
+const costumerOpt = require('../../options/jasmin/costumerOpt');
 const jasminLogin =require('./jasminLogin');
 var index = 22;
 const findCostumer = (nif) => {

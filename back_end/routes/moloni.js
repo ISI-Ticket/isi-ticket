@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
-const params = require('../api_options/moloni/auth');
+const params = require('../options/moloni/auth');
 var refresh_token = '';
 var access_token = '';
 

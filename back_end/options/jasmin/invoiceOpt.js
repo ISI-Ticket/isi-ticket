@@ -1,13 +1,14 @@
-const credentials = require('../../imp_info/jasmin_org')
-const getInvoicesOpt = (token) =>{
+const credentials = require('../../config/jasmin_org')
+const getInvoiceOpt = (token, reference) =>{
    let options = { 
         method: 'GET',
-        url: `https://my.jasminsoftware.com/api/${credentials.tenant}/${credentials.org}/sales/orders`,
+        url: `https://my.jasminsoftware.com/api/${credentials.tenant}/${credentials.org}/billing/invoices/DEFAULT/FA/2020/${reference}/print`,
+        'encoding': 'binary',
         headers: { 
         'Authorization' : `${token}`,
         'Content-Type' : 'application/json'
         }
-    }
+    } 
     return options;
 }
 
@@ -47,5 +48,5 @@ const info = (buyerCustomerParty, items) =>{
 
 
 exports.info = info;
-exports.getInvoicesOpt = getInvoicesOpt;
+exports.getInvoiceOpt = getInvoiceOpt;
 exports.createInvoiceOpt = createInvoiceOpt;

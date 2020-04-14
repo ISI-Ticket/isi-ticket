@@ -1,9 +1,17 @@
 const request = require('request');
 const jasminLogin =require('./jasminLogin');
-const invoiceOpt = require('../../api_options/jasmin/invoiceOpt');
+const invoiceOpt = require('../../options/jasmin/invoiceOpt');
 const saleDB = require('../../dbQueries/saleDB');
-var index = 16;
+const nodemailer = require('../nodemailer/send');
+const fs = require('fs');
+var index = 42;
 const create = (customerPartyKey, items) =>{
+    let date = new Date();
+    let day = date.getDate();
+    let monthJS = date.getMonth();
+    let month = (parseInt(monthJS) + 1).toString()
+    let year = date.getFullYear();
+    console.log(`${year}-${month}-${day}`);
     return new Promise((resolve, reject) =>{
         jasminLogin.auth().then((token) =>{
             let invoice = invoiceOpt.info(customerPartyKey, items);
@@ -13,7 +21,7 @@ const create = (customerPartyKey, items) =>{
             request(options, function (error, response, body) {
                 if (error) reject("Oops something went wrong");
                 else{
-                    saleDB.insert(customerPartyKey, "2020-05-12", items, index.toString());
+                    saleDB.insert(customerPartyKey, `${year}-${month}-${day}`, items, index.toString());
                     resolve(index.toString());
                 }
             });
@@ -21,4 +29,25 @@ const create = (customerPartyKey, items) =>{
     });
 }
 
+const get = (reference) =>{
+jasminLogin.auth().then((token) =>{
+    let options = invoiceOpt.getInvoiceOpt(token, reference);
+    console.log(options);
+    request(options, function (error, response, body) {
+        let file = '../../fatura.pdf'
+        if (error) ("Oops something went wrong: " + error);
+        else{
+            fs.writeFile(file, body, 'binary', function(err) {
+                if(err) console.log(err);
+                else console.log("The file was saved!");
+                nodemailer.sendEmail("eduardogomes9995@gmail.com");
+            }); 
+        }
+    });
+});
+}
+
+
+
+exports.get = get;
 exports.create = create;

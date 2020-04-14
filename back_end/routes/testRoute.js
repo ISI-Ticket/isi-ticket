@@ -2,9 +2,12 @@ const express = require('express');
 const router = express.Router();
 const sales = require('../services/jasmin/costumer');
 const invoice = require('../services/jasmin/invoice');
-const authOpt = require('../api_options/jasmin/authOpt');
+const authOpt = require('../options/jasmin/authOpt');
 const request = require('request');
 const saleDB = require('../dbQueries/saleDB');
+const ticketDB = require('../dbQueries/ticketDB');
+const send = require('../services/nodemailer/send');
+const fs = require('fs')
 let token;
 /*router.use(function (req, res, next) {
     let json;
@@ -27,8 +30,26 @@ router.post('/createCustomer', (req,res) =>{
 
 router.get('/test/:clientID', (req,res) =>{
     saleDB.select(req.params.clientID, res);
-   
 });
+
+router.get('/history/:clientID', (req,res) =>{
+    ticketDB.select(req.params.clientID, res);
+});
+
+router.get('/sendEmail', (req,res) =>{
+    send.sendEmail("eduardogomes9995@gmail.com");
+    res.send("it works");
+})
+
+router.get('/send', (req,res) =>{
+    invoice.get('22').then((data) =>{
+        var writeStream = fs.createWriteStream('../response.pdf')
+        data.body.pipe(writeStream);
+        res.send(writeStream);
+    })
+    
+
+})
 
 
 module.exports = router;

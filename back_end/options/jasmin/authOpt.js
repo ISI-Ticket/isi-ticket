@@ -1,4 +1,4 @@
-const credentials = require('../../imp_info/jasmin_login.js');
+const credentials = require('../../config/jasmin_login.js');
 const options = {
     url: 'https://identity.primaverabss.com/core/connect/token',
     method : 'POST',

@@ -1,4 +1,4 @@
-const authOpt = require('../../api_options/jasmin/authOpt');
+const authOpt = require('../../options/jasmin/authOpt');
 const request = require('request');
 
 const auth = () =>{

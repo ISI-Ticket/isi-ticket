@@ -1,4 +1,4 @@
-var connection = require('../imp_info/connection');
+var connection = require('../config/connection');
 const express = require('express');
 const router = express.Router();
 const validateTicketDB = require('../dbQueries/validateTicketDB');
