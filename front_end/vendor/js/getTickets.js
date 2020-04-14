@@ -13,7 +13,7 @@ function populate(tickets){
     let page;
     let index = 0;
     for(ticket of tickets){
-        let qrcode = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=22/${ticket.ticketID}-${ticket.reference}" alt="" title="" />`
+        let qrcode = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=22/${ticket.ticketID}-${ticket.reference}" alt="" title="" />`
         for(let i = 0; i < ticket.quantity; i++){
             index += 1;
             let date = ticket.date.substring(0,10);
@@ -28,7 +28,7 @@ function populate(tickets){
                 <a class="button" href="#popup${index}">  <span class="iconify" data-icon="mdi-qrcode-scan" data-inline="false"></span> </a>
                 <div id="popup${index}" class="overlay">
                 <div class="popup">
-                    <h1>${ticket.ticketName} - ${date}</h1>
+                    <h1 style ="font-size: 20px">${ticket.ticketName} - ${date}</h1>
                     <a class="close" href="#">&times;</a>
                     <div class="content">
                         ${qrcode}

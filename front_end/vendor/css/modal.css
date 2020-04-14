@@ -14,11 +14,12 @@
   }
   
   .popup {
-    margin: 70px auto;
+    margin: 0 auto;
+    top: 20%;
     padding: 20px;
     background: #fff;
     border-radius: 5px;
-    width: 30%;
+    width: 10%;
     position: relative;
     transition: all 5s ease-in-out;
   }
@@ -39,8 +40,13 @@
   }
   .popup .content {
     max-height: 30%;
+    text-align: center;
     overflow: auto;
+    width: 80%;
+    margin: 0 auto;
   }
+
+  
   
   @media screen and (max-width: 700px){
     .box{

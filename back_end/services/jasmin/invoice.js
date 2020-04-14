@@ -4,7 +4,7 @@ const invoiceOpt = require('../../options/jasmin/invoiceOpt');
 const saleDB = require('../../dbQueries/saleDB');
 const nodemailer = require('../nodemailer/send');
 const fs = require('fs');
-var index = 42;
+var index = 43;
 const create = (customerPartyKey, items) =>{
     let date = new Date();
     let day = date.getDate();
