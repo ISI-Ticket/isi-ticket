@@ -332,4 +332,15 @@ body {
     display: block;
     margin: 40px auto 80px auto;
     font-size: 1.75em;
+    color: #ffffff;
+    background-color: #bd1e21;
+}
+
+.btn-purchase:hover {
+    display: block;
+    margin: 40px auto 80px auto;
+    font-size: 1.75em;
+    color: #bd1e21;
+    background-color: #ffffff;
+    
 }

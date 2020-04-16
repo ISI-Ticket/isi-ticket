@@ -100,7 +100,7 @@ function addItemToCart(title, price) {
             <input class="cart-quantity-input" type="number" value="1">
             <input class="cart-quantity-input" type="hidden" value=${ticketID}>
             
-            <button class="btn btn-danger" type="button">REMOVE</button>
+            <button class="btn btn-danger" type="button">Remover</button>
         </div>`
     cartRow.innerHTML = cartRowContents
     cartItems.append(cartRow)

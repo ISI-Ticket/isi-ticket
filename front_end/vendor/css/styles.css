@@ -320,6 +320,20 @@ button:hover {
     cursor: pointer;
 }
 
+.classbuttton2:hover{
+    background-color: #bd1e21;
+    border: 2px solid;
+    border-color: #bd1e21;
+    color: #FFFFFF;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: auto;
+    cursor: pointer;
+}
+
 .iconify {
     width: 50px;
     height: 50px;
