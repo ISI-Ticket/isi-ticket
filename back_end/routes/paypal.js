@@ -52,7 +52,7 @@ router.get('/success/:total', (req, res) => {
                         invoice.create(costumer.customerPartyKey, items).then((reference) => { invoice.get(reference) })
                     } else {
                         jasmin.createCostumer(user).then((costumerKey) => {
-                            invoice.create(costumerKey, items).then((seriesNUM) => { console.log(seriesNUM) })
+                            invoice.create(costumerKey, items).then((reference) => { invoice.get(reference) })
                         });
                     }
                 })

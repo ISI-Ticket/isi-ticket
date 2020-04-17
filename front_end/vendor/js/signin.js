@@ -1,7 +1,18 @@
 var profileTest;
-window.onload = renderButton();
+
+/*gapi.load('auth2', initSigninV2);
+
+function initSigninV2() {
+    gapi.auth2.init({
+        client_id: '680946609407-a812c4bn4704j8u2n15lsud3hq19c3a5.apps.googleusercontent.com'
+    }).then(function (authInstance) {
+        // now auth2 is fully initialized
+    });
+}*/
+//window.onload = renderButton();
 
 function renderButton() {
+
     gapi.signin2.render('my-signin2', {
         'scope': 'profile email',
         //'width': 240,

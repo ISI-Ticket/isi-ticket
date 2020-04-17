@@ -1,6 +1,7 @@
 const request = require('request');
 const costumerOpt = require('../../options/jasmin/costumerOpt');
 const jasminLogin =require('./jasminLogin');
+const clientDB = require('../../dbQueries/clientDB')
 var index = 22;
 const findCostumer = (nif) => {
     return new Promise((resolve, reject) =>{
@@ -24,6 +25,7 @@ const createCostumer = (userInfo) =>{
             let partyKey = index.toString();
             let user = costumerOpt.info(userInfo.firstname, userInfo.lastname, userInfo.nif, userInfo.phone, userInfo.email, userInfo.address, userInfo.zip, userInfo.city, partyKey);
             let options = costumerOpt.createCustomer(user, token);
+            clientDB.insert(index, userInfo.firstname, userInfo.lastname, userInfo.email);
             request(options, function (error, response, body) {
                 if (error) reject("Oops something went wrong");
                 else resolve(partyKey);

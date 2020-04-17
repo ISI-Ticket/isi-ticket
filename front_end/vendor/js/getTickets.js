@@ -9,17 +9,19 @@ async function getTickets(){
 }
 
 function populate(tickets){
+    console.log(tickets)
     let render  = document.getElementById('render');
     let page;
     let index = 0;
     for(ticket of tickets){
+        let img = setImage(ticket.ticketID);
         let qrcode = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=22/${ticket.ticketID}-${ticket.reference}" alt="" title="" />`
         for(let i = 0; i < ticket.quantity; i++){
             index += 1;
             let date = ticket.date.substring(0,10);
             page = 
             `<div class="card-panel recipe white row">
-            <img src="../img/greenticket.png" alt="recipe thumb">
+            <img src=${img} alt="recipe thumb">
             <div class="recipe-details">
                 <div class="recipe-title">${ticket.ticketName} </div>
                 <div class="recipe-ingredients">${ticket.description} - ${date}</div>
@@ -41,6 +43,20 @@ function populate(tickets){
         }
     }
    
+}
+
+
+function setImage(ticketID){
+    switch (ticketID){
+        case 1:
+            return "../img/yellowticket.png"
+        case 2: 
+            return "../img/greenticket.png"
+        case 3:
+            return "../img/purpleticket.png"
+        case 4: 
+            return "../img/orangeticket.png"
+    }
 }
 
 

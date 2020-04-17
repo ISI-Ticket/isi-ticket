@@ -6,6 +6,7 @@ function getProfile(){
     document.getElementById("email").value = profile.email;
     document.getElementById("firstname").value = profile.firstname;
     document.getElementById("lastname").value = profile.lastname;
+    document.getElementById("nif").value = profile.nif;
     document.getElementById("phone").value = profile.phone;
     document.getElementById("address").value = profile.address;
     document.getElementById("city").value = profile.city;

@@ -21,9 +21,12 @@
 
     <!-- Google shit-->
     <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id"
-        content="680946609407-a812c4bn4704j8u2n15lsud3hq19c3a5.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="680946609407-a812c4bn4704j8u2n15lsud3hq19c3a5.apps.googleusercontent.com">
+
+
+    <script src="vendor/js/signin.js"></script>
+ 
 </head>
 
 <body class="grey lighten-4">
@@ -39,7 +42,7 @@
                 </span>
                 <div class="container">
                     <center>
-                        <div  id="my-signin2"></div>
+                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
                     </center>
                     <br>
                     <center>
@@ -62,7 +65,7 @@
 
     <script src="vendor/js/app.js"></script>
     <script src="vendor/js/ui.js"></script>
-    <script src="vendor/js/signin.js"></script>
+
 
 </body>
 
