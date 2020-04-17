@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const sales = require('../services/jasmin/costumer');
-const invoice = require('../services/jasmin/invoice');
+const sales = require('../requests/jasmin/costumer');
+const invoice = require('../requests/jasmin/invoice');
 const authOpt = require('../options/jasmin/authOpt');
 const request = require('request');
 const saleDB = require('../dbQueries/saleDB');
 const ticketDB = require('../dbQueries/ticketDB');
-const send = require('../services/nodemailer/send');
+const send = require('../requests/nodemailer/send');
 const fs = require('fs')
 let token;
 /*router.use(function (req, res, next) {

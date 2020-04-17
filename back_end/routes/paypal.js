@@ -3,9 +3,9 @@ const router = express.Router();
 const paypal = require('paypal-rest-sdk');
 const paypalAuth = require('../config/paypal_auth');
 const paypalOptions = require('../options/paypal/payment')
-const hubspot = require('../services/hubspot/user');
-const jasmin = require('../services/jasmin/costumer')
-const invoice = require('../services/jasmin/invoice');
+const hubspot = require('../requests/hubspot/user');
+const jasmin = require('../requests/jasmin/costumer')
+const invoice = require('../requests/jasmin/invoice');
 
 
 paypal.configure({
