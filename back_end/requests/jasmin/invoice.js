@@ -4,7 +4,7 @@ const invoiceOpt = require('../../options/jasmin/invoiceOpt');
 const saleDB = require('../../dbQueries/saleDB');
 const nodemailer = require('../nodemailer/send');
 const fs = require('fs');
-var index = 43;
+var index = 51;
 const create = (customerPartyKey, items) =>{
     let date = new Date();
     let day = date.getDate();
@@ -40,7 +40,7 @@ jasminLogin.auth().then((token) =>{
             fs.writeFile(file, body, 'binary', function(err) {
                 if(err) console.log(err);
                 else console.log("The file was saved!");
-                nodemailer.sendEmail("eduardogomes9995@gmail.com");
+                nodemailer.sendEmail("clientisiticket@gmail.com");
             }); 
         }
     });

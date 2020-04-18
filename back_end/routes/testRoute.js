@@ -6,6 +6,7 @@ const authOpt = require('../options/jasmin/authOpt');
 const request = require('request');
 const saleDB = require('../dbQueries/saleDB');
 const ticketDB = require('../dbQueries/ticketDB');
+const clientDB = require('../dbQueries/clientDB');
 const send = require('../requests/nodemailer/send');
 const fs = require('fs')
 let token;
@@ -51,5 +52,10 @@ router.get('/send', (req,res) =>{
 
 })
 
+
+router.post('/testeuser', (req,res) =>{
+    clientDB.insert(req.body.clientID, req.body.firstname, req.body.lastname, req.body.email);
+    res.send('ok')
+})
 
 module.exports = router;
