@@ -19,6 +19,21 @@ body {
     font-size: 16px;
     color: #FFF;
 }
+.loginnav{
+    background-color: #e33742;
+    width: 500px;
+    height: 400px;
+}
+
+.logintitle{
+    color: white;
+    letter-spacing: 6px;
+
+}
+.logoimage{
+    position: center;
+   top: 40%;
+}
 
 .loginBtn:before {
     content: "";

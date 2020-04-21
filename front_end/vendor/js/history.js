@@ -1,5 +1,5 @@
 
-/*window.onload = function(){
+window.onload = function(){
     this.getHistory().then(tickets => populate(tickets))
 }
 async function getHistory(){
@@ -19,15 +19,16 @@ function populate(tickets){
             let date = ticket.date.substring(0,10);
             page = 
             `<div class="card-panel recipe white row">
-                <img src= ${image} alt="recipe thumb">
-                <div class="recipe-details">
-                    <div class="recipe-title">${ticket.ticketName} </div>
-                    <div class="recipe-ingredients">${ticket.description} - ${date}</div>
-                </div>
-            </div>`
+            <img src= ${image} alt="recipe thumb">
+            <div class="recipe-details">
+                <div class="recipe-title">${ticket.ticketName} </div>
+                <div class="recipe-ingredients">${ticket.description} - ${date}</div>
+            </div>
+        </div>`
             render.innerHTML += page;
         }
     }
+   
 }
 
 
@@ -43,4 +44,4 @@ function setImage(ticketID){
         case 4: 
             return "../img/orangeticket.png"
     }
-}*/
+}
