@@ -305,9 +305,11 @@ body {
 
 .btn-danger {
     margin-left: 30px;
-    background: transparent;
+    background: #e33742;
     border: none;
     font-weight: bold;
+    text-align: center;
+    width: 50px;
 }
 
 .btn-danger:hover {
