@@ -12,6 +12,7 @@ function populate(tickets){
     let render  = document.getElementById('render');
     let page;
     let index = 0;
+    console.log(tickets);
     for(ticket of tickets){
         let image = setImage(ticket.ticketID)
 
@@ -24,7 +25,7 @@ function populate(tickets){
                 <div class="recipe-title">${ticket.ticketName} </div>
                 <div class="recipe-ingredients" style="font-size: medium;">${ticket.description} </div>
                 <br>
-                <div class="recipe-ingredients" style="font-size: medium;">${validationDate()}</div>
+                <div class="recipe-ingredients" style="font-size: medium;">${validationDate(ticket.validated)}</div>
             </div>
         </div>`
             render.innerHTML += page;
