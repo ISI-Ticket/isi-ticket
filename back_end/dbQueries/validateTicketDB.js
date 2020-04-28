@@ -4,17 +4,17 @@ const connection = require('../config/connection');
 const getStatus = (saleID, res) =>{
     saleID = parseInt(saleID);
     let params = [saleID]
-    let sql = "SELECT status from Sale WHERE saleID = ?"
+    let sql = "SELECT status, ticketID from Sale WHERE saleID = ?"
     var query = connection.query(sql, params, function(err, results) {
         console.log(err);
         let row = JSON.parse(JSON.stringify(results[0]))
         console.log(row);
-        checkStatus(saleID, res)
+        checkStatus(row.status,row.ticketID,saleID, res)
     });
     console.log(query.sql);
 }
 
-function validateTicket(saleID, res){
+function validateTicket(saleID,ticketID, res){
     let date = new Date();
     let day = date.getDate();
     let monthJS = date.getMonth();
@@ -33,11 +33,11 @@ function validateTicket(saleID, res){
     console.log(query.sql)
 }
 
-function checkStatus(saleID, res){
+function checkStatus(status,ticketID, saleID, res){
 
     let data = {status : false,msg : ''}
     if(status == false)res.send(data);
-    else validateTicket(saleID, res);
+    else validateTicket(saleID,ticketID, res);
 }
 
 
