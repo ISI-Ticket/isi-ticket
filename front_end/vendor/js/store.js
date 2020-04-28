@@ -62,12 +62,22 @@ function addItemToCart(title, price) {
     cartRow.classList.add('cart-row')
     var cartItems = document.getElementsByClassName('cart-items')[0]
     var cartItemNames = cartItems.getElementsByClassName('cart-item-title')
-    for (var i = 0; i < cartItemNames.length; i++) {
+    var cartRows = cartItems.getElementsByClassName('cart-row')
+    for (var i = 0; i < cartRows.length; i++) {
+        if (cartItemNames[i].innerText == title) {
+            var cartRow = cartRows[i]
+            var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
+            quantityElement.value = parseInt(quantityElement.value) + 1;
+            return
+        }
+
+    }
+    /*for (var i = 0; i < cartItemNames.length; i++) {
         if (cartItemNames[i].innerText == title) {
             alert('This item is already added to the cart')
             return
         }
-    }
+    }*/
     let ticketID = 0;
 
     switch(title){
@@ -111,8 +121,6 @@ function addItemToCart(title, price) {
 }
 
 function updateCartTotal() {
-    var cartItems = document.getElementsByClassName('cart-items')[0]
-    var cartItemNames = cartItems.getElementsByClassName('cart-item-title')
     var cartItemContainer = document.getElementsByClassName('cart-items')[0]
     var cartRows = cartItemContainer.getElementsByClassName('cart-row')
     var total = 0

@@ -1,35 +1,43 @@
 const connection = require('../config/connection');
 
 
-const getQuantity = (clientID, ticketID, reference, res) =>{
-    let params = [parseInt(clientID), parseInt(ticketID), reference]
-    let sql = "SELECT quantity from Sale WHERE clientID = ? and ticketID = ? and reference = ?"
+const getStatus = (saleID, res) =>{
+    saleID = parseInt(saleID);
+    let params = [saleID]
+    let sql = "SELECT status from Sale WHERE saleID = ?"
     var query = connection.query(sql, params, function(err, results) {
         console.log(err);
         let row = JSON.parse(JSON.stringify(results[0]))
         console.log(row);
-        checkQty(row.quantity,parseInt(clientID), parseInt(ticketID), reference, res)
+        checkStatus(saleID, res)
     });
     console.log(query.sql);
 }
 
-function validateTicket(quantity, ticketID, clientID, reference, res){
+function validateTicket(saleID, res){
+    let date = new Date();
+    let day = date.getDate();
+    let monthJS = date.getMonth();
+    let month = (parseInt(monthJS) + 1).toString()
+    let year = date.getFullYear();
+    let fullDate = `${year}-${month}-${day}`;
     let data = {status : true, msg : ''}
     data.msg = checkTicket(ticketID) + ' validada com sucesso!';
-    let newQty = quantity - 1;
-    let params = [newQty, clientID, ticketID, reference];
-    let sql = "UPDATE Sale SET quantity = ? WHERE clientID = ? and ticketID = ? and reference = ?"
+    let status = false;
+    let params = [status, fullDate, saleID];
+    let sql = "UPDATE Sale SET status = ?, validated = ? WHERE saleID = ?"
     let query = connection.query(sql, params, function (error, results, fields) {
         if (error) throw error;
         res.send(data)
       });
     console.log(query.sql)
 }
-function checkQty(quantity, clientID, ticketID, reference, res){
+
+function checkStatus(saleID, res){
 
     let data = {status : false,msg : ''}
-    if(quantity < 1)res.send(data);
-    else validateTicket(quantity, ticketID, clientID, reference, res);
+    if(status == false)res.send(data);
+    else validateTicket(saleID, res);
 }
 
 
@@ -46,4 +54,4 @@ function checkTicket(ticketID){
     }
 }
 
-exports.getQuantity = getQuantity;
+exports.getStatus = getStatus;

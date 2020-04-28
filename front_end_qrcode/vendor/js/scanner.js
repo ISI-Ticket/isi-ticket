@@ -14,10 +14,8 @@ Instascan.Camera.getCameras().then(cameras => {
 
 
 function validateTicket(content){
-    let clientID = content.substr(0, content.indexOf('/'));
-    let ticketID = content.split('/').pop().split('-')[0];
-    let reference = content.substr(content.indexOf('-') + 1);
-    let data = {clientID, ticketID, reference};
+    let saleID = content;
+    let data = {saleID};
     console.log(data);
     fetch('http://localhost:5000/employee/validate',{
         headers: {'Content-Type': 'application/json'},

@@ -1,4 +1,4 @@
-windowonload = getProfile();
+window.onload = getProfile();
 
 function getProfile(){
     let profile = JSON.parse(localStorage.getItem('profile'));

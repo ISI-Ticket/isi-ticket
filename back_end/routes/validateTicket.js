@@ -5,7 +5,7 @@ const validateTicketDB = require('../dbQueries/validateTicketDB');
 
 
 router.post('/validate', (req,res) =>{
-  validateTicketDB.getQuantity(req.body.clientID, req.body.ticketID, req.body.reference, res);
+  validateTicketDB.getStatus(req.body.saleID, res);
 })
 
 module.exports = router;

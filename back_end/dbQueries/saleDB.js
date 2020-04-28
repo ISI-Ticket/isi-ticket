@@ -2,7 +2,7 @@ const connection = require('../config/connection');
 
 
 const insert = (clientID, date, items, reference) =>{
-    let sql = 'INSERT INTO Sale (date, quantity, ticketID, clientID, reference, qtyObtained) VALUES ?'
+    let sql = 'INSERT INTO Sale (date, status, ticketID, clientID, reference) VALUES ?'
     let records = prepareEntry(items, clientID, date, reference);
     console.log(records);
     var query = connection.query(sql, [records], function(err, result) {
@@ -12,7 +12,7 @@ const insert = (clientID, date, items, reference) =>{
 
 
 const select = (clientID, res) =>{
-    let sql = "SELECT date, quantity, ticketID, clientID, reference FROM Sale WHERE quantity != 0 and clientID = ?"
+    let sql = "SELECT saleID, date, ticketID, clientID, reference FROM Sale WHERE status != false and clientID = ?"
     var query = connection.query(sql, parseInt(clientID), function (error, results, fields) {
             let rows = JSON.parse(JSON.stringify(results))
             res.send(prepareResponse(rows));
@@ -24,10 +24,10 @@ function prepareResponse(rows){
     let data = [];
     for(row of rows){
         let ticket = {
+            saleID : row.saleID,
             ticketID : row.ticketID,
             ticketName : '',
             description : '',
-            quantity : row.quantity,
             date : row.date,
             reference : row.reference
         }
@@ -54,21 +54,21 @@ function prepareResponse(rows){
                 break;    
           }
     }
-    //console.log(data);
     return data;
 }
 function prepareEntry(items, clientID, date, reference){
     let records = []
     for(item of items){
-        let sale = [];
-        sale.push(date);
-        sale.push(item.quantity);
-        ticketID = parseInt(item.sku);
-        sale.push(ticketID);
-        sale.push(parseInt(clientID));
-        sale.push(reference);
-        sale.push(item.quantity);
-        records.push(sale);
+        for(let i = 0; i<item.quantity; i++){
+            let sale = [];
+            sale.push(date);
+            sale.push(true);
+            ticketID = parseInt(item.sku);
+            sale.push(ticketID);
+            sale.push(parseInt(clientID));
+            sale.push(reference);
+            records.push(sale);
+        }
     }
     return records;
 }
