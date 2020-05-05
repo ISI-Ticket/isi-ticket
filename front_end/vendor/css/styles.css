@@ -155,7 +155,8 @@ form .input-field {
 
 .navbarbot {
     overflow: hidden;
-    background-color: #f7f5f5;
+    border-top: 1px solid whitesmoke;
+    background-color:white/* #e33742*/;
     /* BARRAS DE BAIXO GRANDE  */
     position: fixed;
     bottom: 0;
@@ -179,7 +180,7 @@ form .input-field {
 }
 
 .navbarbot a.active {
-    background-color: #e33742;
+    background-color: #f7f5f5;
     /*BAIXO GRANDE ICON*/
     color:white;
 }
@@ -194,6 +195,13 @@ form .input-field {
     width: 100%
 }
 
+i.icon-white {
+    color: white;
+}
+
+i.icon-black {
+    color: #2E2E2E;
+}
 
 /*LOGIN*/
 
