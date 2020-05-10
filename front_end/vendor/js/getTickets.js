@@ -3,7 +3,7 @@ window.onload = function(){
     this.getTickets().then(tickets => populate(tickets))
 }
 async function getTickets(){
-  let response = await fetch('http://localhost:5000/test/test/26');
+  let response = await fetch('http://localhost:5000/test/test/clientisiticket@gmail.com');
   let data = await response.json()
   return data;
 }

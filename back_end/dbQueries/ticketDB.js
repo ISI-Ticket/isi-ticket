@@ -1,8 +1,8 @@
 const connection = require('../config/connection');
 
-const select = (clientID, res) =>{
-    let sql = "SELECT date, ticketID, clientID, validated FROM Sale WHERE clientID = ?"
-    var query = connection.query(sql, parseInt(clientID), function (error, results, fields) {
+const select = (userEmail, res) =>{
+    let sql = "SELECT date, ticketID, clientID, validated FROM Sale WHERE clientID IN (SELECT clientID FROM Client WHERE email = ?)"
+    var query = connection.query(sql, userEmail, function (error, results, fields) {
             let rows = JSON.parse(JSON.stringify(results))
             res.send(prepareResponse(rows));
       });

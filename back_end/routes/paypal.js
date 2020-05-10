@@ -49,7 +49,6 @@ router.get('/success/:total', (req, res) => {
             hubspot.findUserByEmail(payment.payer.payer_info.email).then((user) => {
                 jasmin.findCostumer(user.nif).then((costumer) => {
                     if (costumer.customerPartyKey != null) {
-                        console.log('CHEGUEI AQUI')
                         invoice.create(costumer.customerPartyKey, items).then((reference) => { invoice.get(reference) })
                     } else {
                         jasmin.createCostumer(user).then((costumerKey) => {

@@ -12,9 +12,9 @@ const insert = (clientID, date, items, reference) =>{
 }
 
 
-const select = (clientID, res) =>{
-    let sql = "SELECT saleID, date, ticketID, clientID FROM Sale WHERE status != false and clientID = ?"
-    var query = connection.query(sql, parseInt(clientID), function (error, results, fields) {
+const select = (userEmail, res) =>{
+    let sql = "SELECT saleID, date, ticketID, clientID FROM Sale WHERE status != false and clientID IN (SELECT clientID FROM Client WHERE email = ?)"
+    var query = connection.query(sql, userEmail, function (error, results, fields) {
             let rows = JSON.parse(JSON.stringify(results))
             res.send(prepareResponse(rows));
       });
