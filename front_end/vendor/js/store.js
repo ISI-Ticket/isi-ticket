@@ -80,20 +80,20 @@ function addItemToCart(title, price) {
     }*/
     let ticketID = 0;
 
-    switch(title){
-        case("Senha Simples"):
+    switch (title) {
+        case ("Senha Simples"):
             ticketID = 1;
             break;
-        case("Senha Completa"):
+        case ("Senha Completa"):
             ticketID = 2;
             break;
-        case("Senha Rampa B"):
+        case ("Senha Rampa B"):
             ticketID = 4;
             break;
-        case("Senha Grill"):
+        case ("Senha Grill"):
             ticketID = 3;
             break;
-        case("Pack de Senhas"):
+        case ("Pack de Senhas"):
             ticketID = 5;
             break;
         default:
@@ -139,9 +139,9 @@ function updateCartTotal() {
 }
 
 
-function getItems(){
+function getItems() {
     let cart = {
-        items:[]
+        items: []
     }
     var cartItems = document.getElementsByClassName('cart-items')[0]
     var cartItemContainer = document.getElementsByClassName('cart-items')[0]
@@ -151,7 +151,7 @@ function getItems(){
         let ticketID = cartRow.getElementsByClassName('cart-quantity-input')[1].value;
         let quantityString = cartRow.getElementsByClassName('cart-quantity-input')[0].value;
         let quantity = parseInt(quantityString);
-        let item = {ticketID, quantity}
+        let item = { ticketID, quantity }
         cart.items.push(item);
     }
 
@@ -166,10 +166,7 @@ function pay(cart) {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
         body: JSON.stringify(cart)
-    }).then(function (res) {
-        console.log(res.url);
-        window.location.href = res.url;
-        //return res.json();
-    })
-  }
-  
+    }).then(res => res.json())
+      .then(data => window.location.href = data.url);
+
+}

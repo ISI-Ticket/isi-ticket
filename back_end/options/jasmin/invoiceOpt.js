@@ -1,8 +1,8 @@
 const credentials = require('../../config/jasmin_org')
-const getInvoiceOpt = (token, reference) =>{
+const getInvoiceOpt = (token, idInvoice) =>{
    let options = { 
         method: 'GET',
-        url: `https://my.jasminsoftware.com/api/${credentials.tenant}/${credentials.org}/billing/invoices/DEFAULT/FA/2020/${reference}/print`,
+        url: `https://my.jasminsoftware.com/api/${credentials.tenant}/${credentials.org}/billing/invoices/${idInvoice}/print`,
         'encoding': 'binary',
         headers: { 
         'Authorization' : `${token}`,

@@ -7,3 +7,4 @@ jasmin_org.js
 nodemailer.js
 
 .vscode
+./back_end/node_modules

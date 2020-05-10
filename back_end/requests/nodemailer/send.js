@@ -9,7 +9,7 @@ let transporter = nodemailer.createTransport({
 
 const sendEmail = (email) =>{
     let options =  mailOptions.mailOptions(email);
-    console.log(options);
+    
     transporter.sendMail(options, (err, data) =>{
         if(err) console.log(err)
         else console.log('Email sent!');

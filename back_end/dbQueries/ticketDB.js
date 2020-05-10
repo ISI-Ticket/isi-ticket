@@ -1,7 +1,7 @@
 const connection = require('../config/connection');
 
 const select = (clientID, res) =>{
-    let sql = "SELECT date, ticketID, clientID, reference, validated FROM Sale WHERE clientID = ?"
+    let sql = "SELECT date, ticketID, clientID, invoiceID, validated FROM Sale WHERE clientID = ?"
     var query = connection.query(sql, parseInt(clientID), function (error, results, fields) {
             let rows = JSON.parse(JSON.stringify(results))
             res.send(prepareResponse(rows));
@@ -19,7 +19,7 @@ function prepareResponse(rows){
             description : '',
             validated : row.validated,
             date : row.date,
-            reference : row.reference
+            invoiceID : row.invoiceID
         }
         switch(row.ticketID){
             case 1:

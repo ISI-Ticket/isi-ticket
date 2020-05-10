@@ -45,9 +45,8 @@ function onSignIn(googleUser) {
     }
     console.log(data);
     fetch('http://localhost:5000/user/signin', {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json'},
         method: 'POST',
-        credentials: "include",
         body: JSON.stringify(data)
     }).then(function (res) {
         return res.json();
@@ -112,7 +111,6 @@ async function signInApi(data) {
         let response = await fetch("http://localhost:5000/signin", {
             headers: { 'Content-Type': 'application/json' },
             method: 'POST',
-            credentials: "include",
             body: JSON.stringify(data)
         });
 

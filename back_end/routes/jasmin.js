@@ -3,7 +3,7 @@ const router = express.Router();
 const request = require('request');
 const auth_options = require('../options/jasmin/authOpt');
 const sales_options = require('../options/jasmin/invoiceOpt');
-var access_token = '';
+let access_token = '';
 
  function loginJasmin(){
     if(access_token === ''){
@@ -30,14 +30,9 @@ router.get('/getInvoices', (req,res) =>{
     });
 });
 
-
-
-
 router.get('/login', (req,res) =>{
     loginJasmin();
     res.send('done');
 });
-
-
 
 module.exports = router;
