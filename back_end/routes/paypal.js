@@ -52,15 +52,8 @@ router.get('/success/:total', (req, res) => {
             let items = payment.transactions[0].item_list.items;
             hubspot.findUserByEmail(payment.payer.payer_info.email).then((user) => {
                 jasmin.findCostumer(user.nif).then((costumer) => {
-<<<<<<< HEAD
-                    if (costumer != null) {
-                        invoice.create(costumer.customerPartyKey, items).then((invoiceID) => {
-                            invoice.get(invoiceID, payment.payer.payer_info.email)
-                        });
-=======
                     if (costumer.customerPartyKey != null) {
                         invoice.create(costumer.customerPartyKey, items).then((reference) => { invoice.get(reference) })
->>>>>>> ba8e81fcb39255409a68f9b372f376e24d574609
                     } else {
                         jasmin.createCostumer(user).then((costumerKey) => {
                             console.log('Party ' + customerPartyKey);
