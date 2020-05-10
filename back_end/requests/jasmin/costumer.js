@@ -14,6 +14,7 @@ const findCostumer = (nif) => {
                     
                     if (response.statusCode === 200) {
                         costumer = JSON.parse(body);
+                        console.log(costumer);
                         resolve(costumer);
                     } else resolve(null);
                     
@@ -33,7 +34,6 @@ const createCostumer = (userInfo) => {
                     let partyKey = index.toString();
                     let user = costumerOpt.info(userInfo.firstname, userInfo.lastname, userInfo.nif, userInfo.phone, userInfo.email, userInfo.address, userInfo.zip, userInfo.city, partyKey);
                     let options = costumerOpt.createCustomer(user, token);
-
                     clientDB.insert(index, userInfo.firstname, userInfo.lastname, userInfo.email);
                     request(options, function (error, response, body) {
                         if (error) reject("Oops something went wrong");

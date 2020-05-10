@@ -26,7 +26,6 @@ const getLastId = () => {
             }
         });
     });
-
 }
 
 exports.insert = insert;
