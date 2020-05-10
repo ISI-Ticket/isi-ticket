@@ -2,17 +2,18 @@ const connection = require('../config/connection');
 
 
 const insert = (clientID, date, items, reference) =>{
-    let sql = 'INSERT INTO Sale (date, status, ticketID, clientID, reference) VALUES ?'
-    let records = prepareEntry(items, clientID, date, reference);
+    let sql = 'INSERT INTO Sale (date, status, ticketID, clientID, invoiceID) VALUES ?'
+    let records = prepareEntry(items, clientID, date, parseInt(reference));
     console.log(records);
     var query = connection.query(sql, [records], function(err, result) {
         console.log(err);
     });
+    console.log(query.sql)
 }
 
 
 const select = (clientID, res) =>{
-    let sql = "SELECT saleID, date, ticketID, clientID, reference FROM Sale WHERE status != false and clientID = ?"
+    let sql = "SELECT saleID, date, ticketID, clientID FROM Sale WHERE status != false and clientID = ?"
     var query = connection.query(sql, parseInt(clientID), function (error, results, fields) {
             let rows = JSON.parse(JSON.stringify(results))
             res.send(prepareResponse(rows));
