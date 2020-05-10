@@ -29,12 +29,21 @@ router.post('/createCustomer', (req, res) => {
     res.send("sim");
 })
 
+<<<<<<< HEAD
 router.get('/test/:clientID', (req, res) => {
     saleDB.select(req.params.clientID, res);
 });
 
 router.get('/history/:clientID', (req, res) => {
     ticketDB.select(req.params.clientID, res);
+=======
+router.get('/test/:userEmail', (req,res) =>{
+    saleDB.select(req.params.userEmail, res);
+});
+
+router.get('/history/:userEmail', (req,res) =>{
+    ticketDB.select(req.params.userEmail, res);
+>>>>>>> ba8e81fcb39255409a68f9b372f376e24d574609
 });
 
 router.get('/sendEmail', (req, res) => {
