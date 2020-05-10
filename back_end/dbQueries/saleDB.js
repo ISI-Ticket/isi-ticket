@@ -14,7 +14,7 @@ const insert = (clientID, date, items, invoiceID) => {
 
 
 const select = (clientID, res) => {
-    let sql = 'SELECT saleID, date, ticketID, clientID, invoiceID FROM Sale WHERE status != false and clientID = ?';
+    let sql = 'SELECT saleID, date, ticketID, clientID, invoiceID FROM Sale WHERE status != false and clientID IN (SELECT clientID FROM Client WHERE email = ?)';
     var query = connection.query(sql, parseInt(clientID), function (error, results, fields) {
         let rows = JSON.parse(JSON.stringify(results))
         res.send(prepareResponse(rows));
