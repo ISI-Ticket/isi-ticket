@@ -4,10 +4,11 @@ const paypal = require('paypal-rest-sdk');
 const paypalAuth = require('../config/paypal_auth');
 const paypalOptions = require('../options/paypal/payment')
 const hubspot = require('../requests/hubspot/user');
-const jasmin = require('../requests/jasmin/costumer')
+const jasminCostumer = require('../requests/jasmin/costumer')
 const jasminInvoice = require('../requests/jasmin/invoice');
 const moloni = require('../requests/moloni/products');
 const moloniCostumer = require('../requests/moloni/costumer')
+const moloniInvoice = require('../requests/moloni/invoice')
 const moloniAuth = require('../requests/moloni/moloniLogin');
 
 paypal.configure({
@@ -17,7 +18,7 @@ paypal.configure({
 });
 
 router.post('/pay', (req, res) => {
-    console.log("sou o  v2")
+    console.log("sou o v2")
     let options = paypalOptions.paymentJSON;
     setOptions(options, req.body).then(optiions => {
         paypal.payment.create(options, function (error, payment) {
@@ -36,7 +37,6 @@ router.post('/pay', (req, res) => {
 });
 
 router.get('/success/:total', (req, res) => {
-    console.log("chegeui");
     const payerID = req.query.PayerID;
     const paymentID = req.query.paymentId;
     let total = req.params.total;
@@ -50,21 +50,28 @@ router.get('/success/:total', (req, res) => {
         } else {
             let items = payment.transactions[0].item_list.items;
             hubspot.findUserByEmail(payment.payer.payer_info.email).then((user) => {
-                jasmin.findCostumer(user.nif).then((costumer) => {
+                jasminCostumer.find(user.nif).then((costumer) => {
                     if (costumer != null) {
-                        jasminInvoice.create(costumer.customerPartyKey, items).then((reference) => { invoice.get(reference) })
+                        jasminInvoice.create(costumer.customerPartyKey, items).then((invoiceID) => {
+                            moloniInvoice.insert(items, costumer.customerPartyKey, total).then(body => {
+                                jasminInvoice.get(invoiceID, payment.payer.payer_info.email)
+                            })  
+                        })
                     } else {
                         moloniCostumer.insert(user).then(costumerId => {
-                            jasmin.createCostumer(user, costumerId).then(costumerKey => {
-                                jasminInvoice.create(costumerKey, items).then((invoiceID) => {
-                                    jasminInvoice.get(invoiceID, payment.payer.payer_info.email)
-                                })
+                            jasminCostumer.create(user, costumerId).then(costumerKey => {
+                                moloniInvoice.insert(items, costumerId, total).then(body => {
+                                    jasminInvoice.create(costumerKey, items).then((invoiceID) => {
+                                        jasminInvoice.get(invoiceID, payment.payer.payer_info.email)
+                                    })
+                                });
+
                             })
                         })
                     }
                 })
             })
-            res.redirect('http://localhost:5500/front_end/vendor/pages/carteira.html');
+            res.redirect('http://localhost:5500/isi-ticket/front_end/vendor/pages/carteira.html');
         }
     });
 });

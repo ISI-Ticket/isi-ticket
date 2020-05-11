@@ -3,7 +3,7 @@ window.onload = function(){
     this.getHistory().then(tickets => populate(tickets))
 }
 async function getHistory(){
-  let response = await fetch('http://localhost:5000/test/history/26');
+  let response = await fetch('http://localhost:5000/test/history/clientisiticket@gmail.com');
   let data = await response.json()
   return data;
 }
