@@ -1,6 +1,6 @@
 const company_id = 128348;
-const insertCostumerOpt = (user, token) =>{
-    let costumer = costumerOpt(user);
+const insertCostumerOpt = (user, index, token) =>{
+    let costumer = costumerOpt(user, index);
     let options = {
         method: 'POST',
         url: `https://api.moloni.pt/v1/customers/insert/?access_token=${token}&json=true`,
@@ -25,11 +25,11 @@ const getCostumerOpt = (token) => {
     return options;
 }
 
-function costumerOpt(client){
+function costumerOpt(client, index){
     let user = {
         company_id : company_id,
         vat : client.nif,
-        number : 1,
+        number : index,
         name : `${client.firstname} ${client.lastname}`,
         language_id : 1,
         address: client.address,
