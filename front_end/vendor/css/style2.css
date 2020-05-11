@@ -12,38 +12,41 @@
     font-family: Raleway;
     color: black;
 }
-.titulo2{
+
+.titulo2 {
     color: white;
     font-size: 30px;
     letter-spacing: 4px;
     font-weight: none;
     margin-top: 50px;
     margin-left: 30px;
-
 }
-.titulo3{
+
+.titulo3 {
     color: black;
     font-size: 25px;
     letter-spacing: 4px;
     font-weight: none;
     margin-top: 50px;
     margin-left: 10px;
-
 }
-.navbartexto{
+
+.navbartexto {
     color: white;
     font-weight: bold;
     letter-spacing: 2px;
-    margin-left: 325px;
+    margin-left: 50%;
 }
+
 html,
 body {
     margin: 0;
     padding: 0;
     min-height: 100%;
 }
-.material-icons{
-    color:black;
+
+.material-icons {
+    color: black;
 }
 
 .nav ul {
@@ -371,5 +374,4 @@ body {
     font-size: 1.75em;
     color: #bd1e21;
     background-color: #ffffff;
-    
 }
