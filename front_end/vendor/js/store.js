@@ -162,7 +162,7 @@ function getItems() {
 
 
 function pay(cart) {
-    fetch('http://localhost:5000/paypal/pay', {
+    fetch('http://localhost:5000/paypalV2/pay', {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
         body: JSON.stringify(cart)

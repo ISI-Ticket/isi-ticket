@@ -1,3 +1,4 @@
+const company_id = 128348;
 const insertCostumerOpt = (user, token) =>{
     let costumer = costumerOpt(user);
     let options = {
@@ -9,9 +10,24 @@ const insertCostumerOpt = (user, token) =>{
     return options;
 }
 
+const getCostumerOpt = (token) => {
+    let body = {
+        company_id : company_id,
+        number : 1
+    }
+
+    let options = {
+        method: 'GET',
+        url: `https://api.moloni.pt/v1/customers/getByNumber/?access_token=${token}&json=true`,
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify(body)
+    }
+    return options;
+}
+
 function costumerOpt(client){
     let user = {
-        company_id : 128348,
+        company_id : company_id,
         vat : client.nif,
         number : 1,
         name : `${client.firstname} ${client.lastname}`,
@@ -34,3 +50,4 @@ function costumerOpt(client){
 }
 
 exports.insertCostumerOpt = insertCostumerOpt;
+exports.getCostumerOpt = getCostumerOpt;

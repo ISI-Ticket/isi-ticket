@@ -24,13 +24,12 @@ const findCostumer = (nif) => {
     })
 }
 
-const createCostumer = (userInfo) => {
+/*const createCostumer = (userInfo) => {
     return new Promise((resolve, reject) => {
         jasminLogin.auth().then((token) => {
             clientDB.getLastId()
                 .then(index => {
                     index += 1;
-
                     let partyKey = index.toString();
                     let user = costumerOpt.info(userInfo.firstname, userInfo.lastname, userInfo.nif, userInfo.phone, userInfo.email, userInfo.address, userInfo.zip, userInfo.city, partyKey);
                     let options = costumerOpt.createCustomer(user, token);
@@ -40,6 +39,21 @@ const createCostumer = (userInfo) => {
                         else resolve(partyKey);
                     });
                 });
+        });
+    });
+}*/
+
+const createCostumer = (userInfo, partyKey) => {
+    return new Promise((resolve, reject) => {
+        jasminLogin.auth().then((token) => {
+            let user = costumerOpt.info(userInfo.firstname, userInfo.lastname, userInfo.nif, userInfo.phone, userInfo.email, userInfo.address, userInfo.zip, userInfo.city, partyKey);
+            let options = costumerOpt.createCustomer(user, token);
+            clientDB.insert(partyKey, userInfo.firstname, userInfo.lastname, userInfo.email);
+            request(options, function (error, response, body) {
+                if (error) reject("Oops something went wrong");
+                else resolve(partyKey);
+            });
+
         });
     });
 }
