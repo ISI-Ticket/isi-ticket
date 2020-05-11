@@ -8,6 +8,7 @@ const saleDB = require('../dbQueries/saleDB');
 const ticketDB = require('../dbQueries/ticketDB');
 const clientDB = require('../dbQueries/clientDB');
 const send = require('../requests/nodemailer/send');
+const moloniCostumer = require('../requests/moloni/costumer')
 const fs = require('fs')
 let token;
 /*router.use(function (req, res, next) {
@@ -26,6 +27,12 @@ router.post('/getCostumer', (req, res) => {
 
 router.post('/createCustomer', (req, res) => {
     sales.createCostumer(req.body.user, req.body.token);
+    res.send("sim");
+})
+
+router.post('/moloni/createCostumer', (req,res) =>{
+    console.log(req.body);
+    moloniCostumer.insertCostumer(req.body);
     res.send("sim");
 })
 
