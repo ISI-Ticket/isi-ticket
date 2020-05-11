@@ -3,7 +3,7 @@ const costumerOpt = require('../../options/jasmin/costumerOpt');
 const jasminLogin = require('./jasminLogin');
 const clientDB = require('../../dbQueries/clientDB')
 
-const findCostumer = (nif) => {
+const find = (nif) => {
     return new Promise((resolve, reject) => {
         jasminLogin.auth().then((token) => {
             let options = costumerOpt.getCostumer(nif, token);
@@ -43,7 +43,7 @@ const findCostumer = (nif) => {
     });
 }*/
 
-const createCostumer = (userInfo, partyKey) => {
+const create = (userInfo, partyKey) => {
     return new Promise((resolve, reject) => {
         jasminLogin.auth().then((token) => {
             let user = costumerOpt.info(userInfo.firstname, userInfo.lastname, userInfo.nif, userInfo.phone, userInfo.email, userInfo.address, userInfo.zip, userInfo.city, partyKey);
@@ -59,5 +59,5 @@ const createCostumer = (userInfo, partyKey) => {
 }
 
 
-exports.findCostumer = findCostumer;
-exports.createCostumer = createCostumer;
+exports.find = find;
+exports.create = create;
