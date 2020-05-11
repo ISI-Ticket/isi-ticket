@@ -8,8 +8,11 @@
     --title: #FFFFFF;
     /* COR DO TITULO */
 }
+
+
 /* titulo  */
-.titulo2{
+
+.titulo2 {
     color: white;
     font-size: 30px;
     letter-spacing: 4px;
@@ -17,14 +20,15 @@
     margin-top: 50px;
     margin-left: 30px;
 }
-.navbartexto{
+
+.navbartexto {
     color: white;
     font-weight: bold;
     letter-spacing: 2px;
     margin-left: 380px;
 }
 
-.textoinfo{
+.textoinfo {
     color: black;
     font-size: 17px;
     letter-spacing: 0.5px;
@@ -33,13 +37,18 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+
 /* Placeholder Perfil*/
-.placeholder1{
+
+.placeholder1 {
     color: black;
     font-size: medium;
     letter-spacing: 1px;
     font-weight: bold;
 }
+
+
 /* layout styles */
 
 nav {
@@ -78,16 +87,12 @@ nav .sidenav-trigger {
     grid-template-areas: "image details delete";
     position: center;
     width: 400px;
-    
-   
-
 }
 
 .recipe img {
     grid-area: image;
     max-width: 90px;
     position: center;
-
 }
 
 .recipe-details {
@@ -166,6 +171,8 @@ form .input-field {
     float: left;
     display: block;
     color: black;
+    width: auto;
+    height: auto;
     /* BARRAS DE BAIXO GRANDE */
     text-align: center;
     padding: 14px 16px;
@@ -181,7 +188,7 @@ form .input-field {
 .navbarbot a.active {
     background-color: #e33742;
     /*BAIXO GRANDE ICON*/
-    color:white;
+    color: white;
 }
 
 #inner {
@@ -211,7 +218,8 @@ form .input-field {
     box-shadow: 0px 1px 3px rgba(90, 90, 90, 1);
     /* LOGIN QUADRADO */
 }
-.qualidades{
+
+.qualidades {
     width: 85%;
     display: block;
     margin-left: auto;
@@ -332,7 +340,6 @@ button:hover {
     right: 0;
     width: 10px;
     background-color: white;
-   
 }
 
 .classbuttton {
@@ -363,10 +370,9 @@ button:hover {
     cursor: pointer;
     width: 200px;
     height: 50px;
-    
-
 }
-.classbuttton2:hover{
+
+.classbuttton2:hover {
     background: transparent;
     color: #e33742;
     text-align: center;
@@ -391,8 +397,7 @@ button:hover {
     height: 50px;
 }
 
-
-.classbuttton3:hover{
+.classbuttton3:hover {
     background: transparent;
     color: #e33742;
     text-align: center;

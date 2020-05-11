@@ -8,7 +8,6 @@ body {
 .loginBtn {
     box-sizing: border-box;
     position: relative;
-    /* width: 13em;  - apply for fixed size */
     margin: 0.2em;
     padding: 0 15px 0 46px;
     border: none;
@@ -19,25 +18,24 @@ body {
     font-size: 16px;
     color: #FFF;
 }
-.loginnav{
-    /*background-color: #e33742; */
-   /* background-image: linear-gradient(to bottom right, #f2a6ab,  #ef8f96, #e9636c,#e64d57, #ec7981); */
-   background: #d31027; 
-   background: -webkit-linear-gradient(to left, #d31027, #ea384d); 
-   background: linear-gradient(to left, #d31027, #ea384d); 
-    width: 456px;
-    height: 400px;
+
+.loginnav {
+    background: #d31027;
+    background: -webkit-linear-gradient(to left, #d31027, #ea384d);
+    background: linear-gradient(to left, #d31027, #ea384d);
+    width: 100%;
+    height: 100%;
     box-shadow: 0px 1px 3px rgba(90, 90, 90, 1);
 }
 
-.logintitle{
+.logintitle {
     color: white;
     letter-spacing: 6px;
-
 }
-.logoimage{
+
+.logoimage {
     position: center;
-   top: 40%;
+    top: 40%;
 }
 
 .loginBtn:before {
