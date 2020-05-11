@@ -20,7 +20,7 @@ paypal.configure({
 router.post('/pay', (req, res) => {
     console.log("sou o v2")
     let options = paypalOptions.paymentJSON;
-    setOptions(options, req.body).then(optiions => {
+    setOptions(options, req.body).then(options => {
         paypal.payment.create(options, function (error, payment) {
             if (error) {
                 console.log(JSON.stringify(error))
@@ -81,7 +81,6 @@ function setOptions(options, cart) {
         let date = new Date();
 
         let data = cycle(cart);
-
         for (product of data.itemsFinal) {
             moloni.getProductStock(product.name).then(stock => {
                 if (data.itemsFinal.quantity > stock) {
@@ -149,7 +148,8 @@ function cycle(cart) {
                 itemObj.price = "4.05"
                 itemObj.currency = "EUR";
                 itemObj.quantity = item.quantity
-                add += +(4.05 * item.quantity).toFixed(2);;
+                add += +(4.05 * item.quantity).toFixed(2);
+                itemsFinal.push(itemObj);
                 break;
             case '5':
                 itemObj.name = "Pack senhas";
