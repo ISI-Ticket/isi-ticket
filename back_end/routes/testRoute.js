@@ -36,7 +36,7 @@ router.post('/moloni/createCostumer', (req,res) =>{
     res.send("sim");
 })
 
-router.get('/test/:userEmail', (req,res) =>{
+router.get('/tickets/:userEmail', (req,res) =>{
     saleDB.select(req.params.userEmail, res);
 });
 
@@ -82,10 +82,18 @@ router.get('/testeId', (req, res) => {
 
 
 router.get('/getSales' , (req, res) =>{
-    //invoice.getAll(res);
-    saleDB.getAll(res);
+    saleDB.getAll().then(data => {
+        let tickets = saleDB.countTickets(data);
+        res.send(tickets)
+    });
 })
 
+router.get('/validInvalid' , (req, res) =>{
+    saleDB.getAll().then(data => {
+        let tickets = saleDB.countValid(data);
+        res.send(tickets)
+    });
+})
 
 
 module.exports = router;

@@ -14,6 +14,7 @@ const insert = (clientID, date, items, invoiceID) => {
 
 
 const select = (email, res) => {
+    
     let sql = 'SELECT saleID, date, ticketID, clientID, invoiceID FROM Sale WHERE status != false and clientID IN (SELECT clientID FROM Client WHERE email = ?)';
     var query = connection.query(sql, email, function (error, results, fields) {
         let rows = JSON.parse(JSON.stringify(results))
@@ -22,18 +23,33 @@ const select = (email, res) => {
     console.log(query.sql)
 }
 
-const getAll = (res) =>{
-    let sql = 'SELECT saleID, date, ticketID FROM Sale';
-    var query = connection.query(sql, function (error, results, fields) {
-        let rows = JSON.parse(JSON.stringify(results))
-        let tickets = count(rows);
-        console.log(tickets);
-        res.send(tickets);
-    });
-    console.log(query.sql)
+const getAll = () =>{
+    return new Promise((resolve, reject) => {
+        let sql = 'SELECT saleID, date, validated, ticketID, invalid FROM Sale';
+        var query = connection.query(sql, function (error, results, fields) {
+            let rows = JSON.parse(JSON.stringify(results))
+            resolve(rows);
+        });
+        console.log(query.sql)
+
+    })
+
 }
 
-function count(sales){
+const countValid = (sales) =>{
+    let tickets = {
+        valid : 0,
+        invalid : 0
+    }
+    for(sale of sales){
+        if(sale.validated != null){
+            tickets.valid += 1;
+            tickets.invalid += sale.invalid;
+        }
+    }
+    return tickets;
+}
+const countTickets =  (sales) => {
     let tickets = {
         simples : 0,
         completa : 0,
@@ -125,3 +141,5 @@ function prepareEntry(items, clientID, date, invoiceID) {
 exports.insert = insert;
 exports.select = select;
 exports.getAll = getAll;
+exports.countTickets = countTickets;
+exports.countValid = countValid;

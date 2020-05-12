@@ -66,29 +66,7 @@
     <!--Senhas validas e senhas inválidas-->
    
    
-   <script type="text/javascript">
-     google.charts.load("current", {packages:["corechart"]});
-     google.charts.setOnLoadCallback(drawChart);
-     function drawChart() {
-       var data = google.visualization.arrayToDataTable([
-         ['Task', 'Hours per Day'],
-         ['Senhas Válidas',     1000],
-         ['Senhas Inválidas',      50]
-        
-       ]);
-
-       var options = {
-         title: 'Senhas Válidas e Senhas Inválidas',
-         pieHole: 0.4,
-         colors:  ['#4ecdc4', '#ef233c'], 
-         legend: { position: 'bottom' }
-
-       };
-
-       var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-       chart.draw(data, options);
-     }
-   </script>
+   <script type="text/javascript" src = '../js/validInvalid.js'></script>
 
      <script type="text/javascript">
     google.charts.load('current', {packages: ['corechart', 'line']});
