@@ -22,6 +22,47 @@ const select = (email, res) => {
     console.log(query.sql)
 }
 
+const getAll = (res) =>{
+    let sql = 'SELECT saleID, date, ticketID FROM Sale';
+    var query = connection.query(sql, function (error, results, fields) {
+        let rows = JSON.parse(JSON.stringify(results))
+        let tickets = count(rows);
+        console.log(tickets);
+        res.send(tickets);
+    });
+    console.log(query.sql)
+}
+
+function count(sales){
+    let tickets = {
+        simples : 0,
+        completa : 0,
+        rampaB : 0,
+        grill : 0,
+        pack : 0
+    }
+
+    for(sale of sales){
+        switch(sale.ticketID){
+            case 1 :
+                tickets.simples += 1; 
+                break;
+            case 2:
+                tickets.completa += 1; 
+                break;
+            case 3:
+                tickets.grill += 1; 
+                break;
+            case 4:
+                tickets.rampaB += 1; 
+                break;
+            case 5:
+                tickets.pack += 1; 
+                break;
+        }
+    }
+    return tickets;
+}
 function prepareResponse(rows) {
     let data = [];
     for (row of rows) {
@@ -83,3 +124,4 @@ function prepareEntry(items, clientID, date, invoiceID) {
 
 exports.insert = insert;
 exports.select = select;
+exports.getAll = getAll;

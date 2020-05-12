@@ -12,6 +12,18 @@ const getInvoiceOpt = (token, idInvoice) =>{
     return options;
 }
 
+const getAllInvoicesOpt = (token) => {
+    let options = { 
+        method: 'GET',
+        url: `https://my.jasminsoftware.com/api/${credentials.tenant}/${credentials.org}/billing/invoices/`,
+        headers: { 
+        'Authorization' : `${token}`,
+        'Content-Type' : 'application/json'
+        }
+    } 
+    return options;
+}
+
 const createInvoiceOpt = (token, invoice) =>{
     let options = { 
         method: 'POST',
@@ -50,3 +62,4 @@ const info = (buyerCustomerParty, items) =>{
 exports.info = info;
 exports.getInvoiceOpt = getInvoiceOpt;
 exports.createInvoiceOpt = createInvoiceOpt;
+exports.getAllInvoicesOpt = getAllInvoicesOpt;

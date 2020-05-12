@@ -32,6 +32,15 @@ const create = (customerPartyKey, items) => {
     });
 }
 
+const getAll = (res) =>{
+    jasminLogin.auth().then((token) => {
+        let options = invoiceOpt.getAllInvoicesOpt(token);
+        request(options, function (error, response, body) {
+            res.send(body);
+        })
+    })  
+}
+
 const get = (invoiceID, email) => {
     jasminLogin.auth().then((token) => {
         let options = invoiceOpt.getInvoiceOpt(token, invoiceID);
@@ -54,3 +63,4 @@ const get = (invoiceID, email) => {
 
 exports.get = get;
 exports.create = create;
+exports.getAll = getAll;

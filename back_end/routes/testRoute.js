@@ -81,5 +81,11 @@ router.get('/testeId', (req, res) => {
 });
 
 
+router.get('/getSales' , (req, res) =>{
+    //invoice.getAll(res);
+    saleDB.getAll(res);
+})
+
+
 
 module.exports = router;

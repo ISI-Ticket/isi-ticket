@@ -59,64 +59,13 @@
 
       <br>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-    
-      function drawChart() {
-    
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Senhas Simples',     11],
-          ['Senhas Completas',      5],
-          ['Pack de Senhas',  10],
-          ['Senha Grill', 2],
-          ['Senha Rampa B',    7]
-        ]);
-    
-        var options = {
-            
-          title: 'Número de senhas compradas',
-          colors: ['#5dd39e', '#4ecdc4', '#ff6b6b', '#f8961e', '#ffe66d'],
-          legend: { position: 'bottom' }
-        };
-       
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-    
-        chart.draw(data, options);
-      }
-    </script>
+    <script type="text/javascript" src = "../js/ticketsBought.js"></script>
 
 <!--line chart-->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Compras'],
-          ['11:00h',  660,],
-          ['12:00h',  1170,],
-          ['13:00h',  1500,],
-          ['14:00h',  660,],
-          ['15:00h',  6,]
-        ]);
-
-        var options = {
-          title: 'Afluência nas Horas',
-          colors:  ['#4ecdc4'],
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
-      }
-    </script>
+    <script type="text/javascript" src = '../js/affluence.js'></script>
     <!--Senhas validas e senhas inválidas-->
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   
+   
    <script type="text/javascript">
      google.charts.load("current", {packages:["corechart"]});
      google.charts.setOnLoadCallback(drawChart);
@@ -141,7 +90,6 @@
      }
    </script>
 
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
      <script type="text/javascript">
     google.charts.load('current', {packages: ['corechart', 'line']});
    google.charts.setOnLoadCallback(drawBasic);
@@ -177,7 +125,6 @@ function drawBasic() {
     </script> 
 
 <!--hora de compra e hora de uso-->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
   google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(drawVisualization);
@@ -205,33 +152,6 @@ function drawBasic() {
     chart.draw(data, options);
   }
 </script>
-<!--Evolução dos Clientes-->
-<!--<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Mês', 'Nº de Clientes'],
-          ['Janeiro',  1000],
-          ['Fevereiro',  1170],
-          ['Março',  660],
-          ['Abril',  1030]
-        ]);
-
-        var options = {
-          title: 'Evolução de Clientes',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart2'));
-
-        chart.draw(data, options);
-      }
-    </script>  -->
-     <!--Nr de clientes registados e nr de clientes habituais-->
-     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
      <script type="text/javascript">
        google.charts.load('current', {'packages':['corechart']});
        google.charts.setOnLoadCallback(drawSeriesChart);
