@@ -3,9 +3,11 @@ window.onload = function(){
     this.getTickets().then(tickets => populate(tickets))
 }
 async function getTickets(){
-  let response = await fetch('http://localhost:5000/test/tickets/clientisiticket@gmail.com');
-  let data = await response.json()
-  return data;
+    let profile = JSON.parse(localStorage.getItem('profile'));
+    let email = profile.email;
+    let response = await fetch(`http://localhost:5000/test/tickets/${email}`);
+    let data = await response.json()
+    return data;
 }
 
 
