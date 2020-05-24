@@ -5,7 +5,7 @@ async function getMonthlyClients(){
     let response = await fetch('http://localhost:5000/admin/monthlyClients');
     let data = await response.json()
     return data;
-  }
+}
 function drawBasic() {
     this.getMonthlyClients().then(clients => {
     console.log(clients)

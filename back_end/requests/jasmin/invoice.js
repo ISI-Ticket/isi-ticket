@@ -11,6 +11,8 @@ const create = (customerPartyKey, items) => {
     let monthJS = date.getMonth();
     let month = (parseInt(monthJS) + 1).toString()
     let year = date.getFullYear();
+    let hour = date.getHours();
+    let minutes = date.getMinutes();
 
     return new Promise((resolve, reject) => {
         jasminLogin.auth().then((token) => {
@@ -24,7 +26,7 @@ const create = (customerPartyKey, items) => {
                     let invoiceID = response.body;
                     invoiceID = invoiceID.replace(/"/g, "");
                     console.log(invoiceID);
-                    saleDB.insert(customerPartyKey, `${year}-${month}-${day}`, items, invoiceID);
+                    saleDB.insert(customerPartyKey, `${year}-${month}-${day} ${hour}:${minutes}:00`, items, invoiceID);
                     resolve(invoiceID);
                 }
             });

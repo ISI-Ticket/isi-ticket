@@ -36,6 +36,41 @@ const getAll = () =>{
 
 }
 
+const getClientAffluence = (res) => {
+        let sql = 'SELECT saleID, date FROM Sale';
+        var query = connection.query(sql, function (error, results, fields) {
+        let rows = JSON.parse(JSON.stringify(results))
+        console.log(rows)
+        res.send(getClientAffluencePayload(rows));
+    });
+    console.log(query.sql)
+}
+
+const getClientAffluencePayload = (rows) =>{
+    let clientAffluence = {
+        10: 0,
+        11: 0,
+        12: 0,
+        13: 0,
+        14: 0,
+        15:0
+    }
+
+    for(sale of rows){
+        for(let i = 10; i <=15; i++){
+            let hour = sale.date;
+            hour = hour.substring(11, 13);
+            hour = parseInt(hour);
+            hour += 1;
+            if(hour == i){
+                clientAffluence[hour] += 1;
+            }
+        }
+    }
+    return clientAffluence;
+}
+
+
 const countValid = (sales) =>{
     let tickets = {
         valid : 0,
@@ -143,3 +178,4 @@ exports.select = select;
 exports.getAll = getAll;
 exports.countTickets = countTickets;
 exports.countValid = countValid;
+exports.getClientAffluence = getClientAffluence;

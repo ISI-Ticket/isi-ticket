@@ -8,6 +8,7 @@ const auth = () =>{
             if (error) throw new Error(error);
             json = JSON.parse(body);
             token = "Bearer " + json.access_token;
+            console.log(body);
             if(!error){
                 resolve(token);
             }else{

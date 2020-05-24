@@ -40,7 +40,7 @@ const monthlyClients = (res) => {
         if(err) console.log(err);
         
         let rows = JSON.parse(JSON.stringify(result))
-        //console.log(rows);
+        console.log(rows);
         let montlyClients = montlyClientsPayload(rows)
         res.send(montlyClients);
     });
@@ -73,7 +73,6 @@ const montlyClientsPayload = (results) =>{
             }
         }
     }
-    console.log(montlyClients)
     return montlyClients;
 
 }

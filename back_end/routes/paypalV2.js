@@ -50,6 +50,7 @@ router.get('/success/:total', (req, res) => {
         } else {
             let items = payment.transactions[0].item_list.items;
             hubspot.findUserByEmail(payment.payer.payer_info.email).then((user) => {
+                console.log(user);
                 jasminCostumer.find(user.nif).then((costumer) => {
                     if (costumer != null) {
                         jasminInvoice.create(costumer.customerPartyKey, items).then((invoiceID) => {

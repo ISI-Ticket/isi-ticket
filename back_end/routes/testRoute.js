@@ -9,6 +9,7 @@ const ticketDB = require('../dbQueries/ticketDB');
 const clientDB = require('../dbQueries/clientDB');
 const send = require('../requests/nodemailer/send');
 const moloniCostumer = require('../requests/moloni/costumer')
+const jasminCoustmer = require('../requests/jasmin/costumer')
 const fs = require('fs')
 let token;
 /*router.use(function (req, res, next) {
@@ -94,6 +95,17 @@ router.get('/validInvalid' , (req, res) =>{
         res.send(tickets)
     });
 })
+
+router.get('/findJasminCostumer' , (req, res) =>{
+    jasminCoustmer.find("237834308").then(client => {
+        console.log(client)
+        res.send(client)
+    })
+})
+
+
+
+
 
 
 module.exports = router;
