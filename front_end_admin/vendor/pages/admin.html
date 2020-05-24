@@ -68,39 +68,7 @@
    
    <script type="text/javascript" src = '../js/validInvalid.js'></script>
 
-     <script type="text/javascript">
-    google.charts.load('current', {packages: ['corechart', 'line']});
-   google.charts.setOnLoadCallback(drawBasic);
-
-function drawBasic() {
-
-    var data = google.visualization.arrayToDataTable([
-          ['Mês', 'Nº de Clientes da App'],
-          ['Janeiro',  1000],
-          ['Fevereiro',  1170],
-          ['Março',  660],
-          ['Abril',  1030]
-        ]);
-
-      var options = {
-          title: 'Evolução de Clientes',
-          legend: { position: 'bottom' },
-          colors:  ['#4ecdc4'],
-        hAxis: {
-          title: 'Meses'
-        },
-        vAxis: {
-          title: 'Nº de Clientes'
-          
-        }
-      };
-
-      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-
-      chart.draw(data, options);
-    }
-    
-    </script> 
+     <script type="text/javascript" src = "../js/clientEvolution.js"></script>
 
 <!--hora de compra e hora de uso-->
 <script type="text/javascript">
@@ -161,13 +129,7 @@ function drawBasic() {
        chart.draw(data, options);
      }
      </script>
-    <!-- bot nav-->
-    <div id="outer" class="navbarbot">
-        <div id="inner">
-            <a href="../pages/sobre.html" class="active"><i class="medium material-icons icon-black" style="color:#e33742">bar_chart</i></a>
-           
-        </div>
-    </div>
+
 
     <script src="../js/app.js"></script>
     <script src="../js/ui.js"></script>
