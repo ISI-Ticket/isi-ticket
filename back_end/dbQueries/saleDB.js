@@ -40,7 +40,6 @@ const getClientAffluence = (res) => {
         let sql = 'SELECT saleID, date FROM Sale';
         var query = connection.query(sql, function (error, results, fields) {
         let rows = JSON.parse(JSON.stringify(results))
-        console.log(rows)
         res.send(getClientAffluencePayload(rows));
     });
     console.log(query.sql)
