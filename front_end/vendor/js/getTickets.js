@@ -1,8 +1,7 @@
-
-window.onload = function(){
+window.onload = function() {
     this.getTickets().then(tickets => populate(tickets))
 }
-async function getTickets(){
+async function getTickets() {
     let profile = JSON.parse(localStorage.getItem('profile'));
     let email = profile.email;
     let response = await fetch(`http://localhost:5000/test/tickets/${email}`);
@@ -11,18 +10,18 @@ async function getTickets(){
 }
 
 
-function populate(tickets){
+function populate(tickets) {
     console.log(tickets)
-    let render  = document.getElementById('render');
+    let render = document.getElementById('render');
     let page;
     let index = 0;
-    for(ticket of tickets){
+    for (ticket of tickets) {
         let img = setImage(ticket.ticketID);
         let qrcode = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${ticket.saleID}" alt="" title="" />`
-            index += 1;
-            let date = ticket.date.substring(0,10);
-            page = 
-            `<div class="card-panel recipe white row" style="height:120px;"><img src="${img}" alt="recipe thumb">
+        index += 1;
+        let date = ticket.date.substring(0, 10);
+        page =
+            `<div class="card-panel recipe white row" style="height:50%;"><img src="${img}" alt="recipe thumb">
                 <div class="recipe-details">
                     <div class="recipe-title" style="font-size:medium;">${ticket.ticketName}</div>
                     <div class="recipe-ingredients" style="font-size: medium;">Comprado em : ${date}</div>
@@ -39,8 +38,8 @@ function populate(tickets){
                 <br>
                 <br>
             </div>`
-            render.innerHTML += page;
-        
+        render.innerHTML += page;
+
     }
 }
 /*
@@ -82,18 +81,15 @@ function populate(tickets){
 }*/
 
 
-function setImage(ticketID){
-    switch (ticketID){
+function setImage(ticketID) {
+    switch (ticketID) {
         case 1:
             return "../img/yellowticket.png"
-        case 2: 
+        case 2:
             return "../img/greenticket.png"
         case 3:
             return "../img/purpleticket.png"
-        case 4: 
+        case 4:
             return "../img/orangeticket.png"
     }
 }
-
-
-
