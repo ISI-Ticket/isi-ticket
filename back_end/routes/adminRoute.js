@@ -11,4 +11,8 @@ router.get('/monthlyClients', (req,res) =>{
 router.get('/getClientAffluence' , (req, res) =>{
   saleDB.getClientAffluence(res);
 })
+
+router.get('/getRegularClients', (req,res) =>{
+  saleDB.getRegularClients().then(r => res.send(r));    
+})
 module.exports = router;

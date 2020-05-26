@@ -69,6 +69,46 @@ const getClientAffluencePayload = (rows) =>{
     return clientAffluence;
 }
 
+const getSalesByMonth = (month)=> {
+
+        let sql = 'SELECT COUNT(clientID) AS numSales, clientID FROM Sale where year(date) = ? and month(date) = ? GROUP BY clientID;';
+        let date = new Date();
+        let year = parseInt(date.getFullYear());
+        let params = [year, month]
+        return new Promise((resolve, reject) => {
+            var query = connection.query(sql,params, function (error, results, fields) {
+            let rows = JSON.parse(JSON.stringify(results))
+            resolve(rows);
+            });
+        });
+
+
+}
+
+const getRegularClients = () =>{
+    console.log("fui chamado")
+    let sales = {};
+    return new Promise((resolve, reject) => {
+        let date = new Date();
+        let year = parseInt(date.getFullYear());
+        for(let month = 1; month<=12; month++){
+            this.getSalesByMonth(month).then((rows) => {
+                let regularClients = 0;
+                let nonRegularClients = 0;
+                for(sale of rows){
+                    if(sale.numSales >= 6){
+                        regularClients += 1;
+                    }else nonRegularClients += 1;
+                }
+                let entry = {regularClients, nonRegularClients};
+                sales[month] = entry;
+                if(month == 12) resolve(sales);
+            })
+             
+    }
+});
+
+}
 
 const countValid = (sales) =>{
     let tickets = {
@@ -178,3 +218,5 @@ exports.getAll = getAll;
 exports.countTickets = countTickets;
 exports.countValid = countValid;
 exports.getClientAffluence = getClientAffluence;
+exports.getSalesByMonth = getSalesByMonth
+exports.getRegularClients = getRegularClients

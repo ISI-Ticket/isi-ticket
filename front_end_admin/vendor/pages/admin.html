@@ -98,37 +98,7 @@
     chart.draw(data, options);
   }
 </script>
-     <script type="text/javascript">
-       google.charts.load('current', {'packages':['corechart']});
-       google.charts.setOnLoadCallback(drawSeriesChart);
- 
-     function drawSeriesChart() {
- 
-       var data = google.visualization.arrayToDataTable([
-         ['ID', 'Clientes Registados', 'Clientes Habituais'],
-         ['Janeiro',    80.66,              4.5],
-         ['Fevereiro',    79.84,              1.36],
-         ['Março',    78.6,               1.84],
-         ['Abril',    72.73,              2.78],
-         ['Maio',    80.05,              2],
-         ['Junho',    72.49,              1.7],
-         ['Julho',    68.09,              4.77],
-         ['Agosto',    81.55,              2.96],
-         ['Setembro',    68.6,               1.54],
-         ['Outubro',    78.09,              2.05]
-       ]);
- 
-       var options = {
-         title: 'Clientes Registados vs Clientes Habituais',
-         hAxis: {title: 'Clientes Registados'},
-         colors: ['#4ecdc4', '#5dd39e'],
-         vAxis: {title: 'Clientes Habituais'},
-         bubble: {textStyle: {fontSize: 11}}      };
- 
-       var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
-       chart.draw(data, options);
-     }
-     </script>
+<script type="text/javascript" src='../js/regularClients.js'></script>
 
 
     <script src="../js/app.js"></script>

@@ -103,6 +103,9 @@ router.get('/findJasminCostumer' , (req, res) =>{
     })
 })
 
+router.get('/getRegularClients', (req,res) =>{
+    saleDB.getRegularClients().then(r => res.send(r));    
+})
 
 
 
