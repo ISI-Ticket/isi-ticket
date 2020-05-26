@@ -4,7 +4,7 @@ window.onload = function() {
 async function getTickets() {
     let profile = JSON.parse(localStorage.getItem('profile'));
     let email = profile.email;
-    let response = await fetch(`http://localhost:5000/test/tickets/${email}`);
+    let response = await fetch(`https://isi-ticket-api.herokuapp.com/test/tickets/${email}`);
     let data = await response.json()
     return data;
 }

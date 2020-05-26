@@ -41,7 +41,7 @@ function onSignIn(googleUser) {
         "email": profile.getEmail()
     }
     console.log(data);
-    fetch('http://localhost:5000/user/signin', {
+    fetch('https://isi-ticket-api.herokuapp.com/user/signin', {
         headers: { 'Content-Type': 'application/json'},
         method: 'POST',
         body: JSON.stringify(data)
@@ -104,7 +104,7 @@ function facebookLogout() {
 
 async function signInApi(data) {
     try {
-        let response = await fetch("http://localhost:5000/signin", {
+        let response = await fetch("https://isi-ticket-api.herokuapp.com/signin", {
             headers: { 'Content-Type': 'application/json' },
             method: 'POST',
             body: JSON.stringify(data)

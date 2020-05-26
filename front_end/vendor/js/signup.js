@@ -17,7 +17,7 @@ function register() {
     let zip = document.getElementById("zip").value;
     let data = {email,firstname,lastname,nif,phone,address,city,zip}
     console.log(data);
-    fetch('http://localhost:5000/user/signup', {
+    fetch('https://isi-ticket-api.herokuapp.com/user/signup', {
         headers: { 'Content-Type': 'application/json'},
         method: 'POST',
         body: JSON.stringify(data)

@@ -10,6 +10,6 @@ WORKDIR /src
 
 RUN npm install
 
-EXPOSE 5000
+EXPOSE 5500
 
-ENTRYPOINT ["node", "./app.js"]
+ENTRYPOINT ["node", "./index.js"]

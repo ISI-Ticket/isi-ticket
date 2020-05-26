@@ -4,7 +4,7 @@ function pay() {
       quantity : 1
   }
   console.log(data);
-  fetch('http://localhost:5000/paypalV2/pay', {
+  fetch('https://isi-ticket-api.herokuapp.com/paypalV2/pay', {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify(data)
