@@ -105,8 +105,47 @@ const getRegularClients = () =>{
                 if(month == 12) resolve(sales);
             })
              
-    }
-});
+        }
+    });
+}
+
+const getYearlyEarnings = (res) => {
+    let sql = 'SELECT SUM(price) AS total  FROM Ticket INNER JOIN Sale ON Ticket.ticketID = Sale.ticketID WHERE year(date) = ?';
+    let date = new Date();
+    let year = parseInt(date.getFullYear());
+    var query = connection.query(sql,year, function (error, results, fields) {
+        let rows = JSON.parse(JSON.stringify(results))
+        res.send(rows[0])
+    });
+
+}
+
+const getMonthlyEarnings = (res) => {
+    let sql = 'SELECT SUM(price) AS total  FROM Ticket INNER JOIN Sale ON Ticket.ticketID = Sale.ticketID WHERE year(date) = ? and month(date) = ?';
+    let date = new Date();
+    let monthJS = date.getMonth();
+    let month = parseInt(monthJS) + 1
+    let year = parseInt(date.getFullYear())
+    let params = [year, month]
+    var query = connection.query(sql,params, function (error, results, fields) {
+        let rows = JSON.parse(JSON.stringify(results))
+        res.send(rows[0])
+    });
+
+}
+
+const getDailyEarnings = (res) => {
+    let sql = 'SELECT SUM(price) AS total  FROM Ticket INNER JOIN Sale ON Ticket.ticketID = Sale.ticketID WHERE year(date) = ? and month(date) = ? and day(date) = ?';
+    let date = new Date();
+    let day = date.getDate();
+    let monthJS = date.getMonth();
+    let month = parseInt(monthJS) + 1
+    let year = parseInt(date.getFullYear());
+    let params = [year, month,day]
+    var query = connection.query(sql,params, function (error, results, fields) {
+        let rows = JSON.parse(JSON.stringify(results))
+        res.send(rows[0])
+    });
 
 }
 
@@ -220,3 +259,6 @@ exports.countValid = countValid;
 exports.getClientAffluence = getClientAffluence;
 exports.getSalesByMonth = getSalesByMonth
 exports.getRegularClients = getRegularClients
+exports.getDailyEarnings = getDailyEarnings
+exports.getMonthlyEarnings = getMonthlyEarnings
+exports.getYearlyEarnings = getYearlyEarnings
