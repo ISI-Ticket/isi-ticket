@@ -9,6 +9,7 @@ const ticketDB = require('../dbQueries/ticketDB');
 const clientDB = require('../dbQueries/clientDB');
 const send = require('../requests/nodemailer/send');
 const moloniCostumer = require('../requests/moloni/costumer')
+const jasminCoustmer = require('../requests/jasmin/costumer')
 const fs = require('fs')
 let token;
 /*router.use(function (req, res, next) {
@@ -36,7 +37,7 @@ router.post('/moloni/createCostumer', (req,res) =>{
     res.send("sim");
 })
 
-router.get('/test/:userEmail', (req,res) =>{
+router.get('/tickets/:userEmail', (req,res) =>{
     saleDB.select(req.params.userEmail, res);
 });
 
@@ -82,9 +83,31 @@ router.get('/testeId', (req, res) => {
 
 
 router.get('/getSales' , (req, res) =>{
-    //invoice.getAll(res);
-    saleDB.getAll(res);
+    saleDB.getAll().then(data => {
+        let tickets = saleDB.countTickets(data);
+        res.send(tickets)
+    });
 })
+
+router.get('/validInvalid' , (req, res) =>{
+    saleDB.getAll().then(data => {
+        let tickets = saleDB.countValid(data);
+        res.send(tickets)
+    });
+})
+
+router.get('/findJasminCostumer' , (req, res) =>{
+    jasminCoustmer.find("237834308").then(client => {
+        console.log(client)
+        res.send(client)
+    })
+})
+
+router.get('/getRegularClients', (req,res) =>{
+    saleDB.getRegularClients().then(r => res.send(r));    
+})
+
+
 
 
 

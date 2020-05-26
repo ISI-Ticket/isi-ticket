@@ -36,10 +36,7 @@ function signOut() {
 }
 
 function onSignIn(googleUser) {
-
     profile = googleUser.getBasicProfile();
-
-
     var data = {
         "email": profile.getEmail()
     }
@@ -57,13 +54,12 @@ function onSignIn(googleUser) {
             localStorage.setItem('profile', response);
             window.location.href = './vendor/pages/perfil.html'
         } else {
+            window.location.href = './vendor/pages/registar.html'
             localStorage.setItem("email", profile.getEmail());
             localStorage.setItem("firstname", profile.getGivenName());
             localStorage.setItem("lastname", profile.getFamilyName());
         };
     });
-
-
 }
 
 //Facebook login - ver melhor o logout...

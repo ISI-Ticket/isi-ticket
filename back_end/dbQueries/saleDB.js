@@ -14,6 +14,7 @@ const insert = (clientID, date, items, invoiceID) => {
 
 
 const select = (email, res) => {
+    
     let sql = 'SELECT saleID, date, ticketID, clientID, invoiceID FROM Sale WHERE status != false and clientID IN (SELECT clientID FROM Client WHERE email = ?)';
     var query = connection.query(sql, email, function (error, results, fields) {
         let rows = JSON.parse(JSON.stringify(results))
@@ -22,18 +23,146 @@ const select = (email, res) => {
     console.log(query.sql)
 }
 
-const getAll = (res) =>{
-    let sql = 'SELECT saleID, date, ticketID FROM Sale';
-    var query = connection.query(sql, function (error, results, fields) {
+const getAll = () =>{
+    return new Promise((resolve, reject) => {
+        let sql = 'SELECT saleID, date, validated, ticketID, invalid FROM Sale';
+        var query = connection.query(sql, function (error, results, fields) {
+            let rows = JSON.parse(JSON.stringify(results))
+            resolve(rows);
+        });
+        console.log(query.sql)
+
+    })
+
+}
+
+const getClientAffluence = (res) => {
+        let sql = 'SELECT saleID, date FROM Sale';
+        var query = connection.query(sql, function (error, results, fields) {
         let rows = JSON.parse(JSON.stringify(results))
-        let tickets = count(rows);
-        console.log(tickets);
-        res.send(tickets);
+        res.send(getClientAffluencePayload(rows));
     });
     console.log(query.sql)
 }
 
-function count(sales){
+const getClientAffluencePayload = (rows) =>{
+    let clientAffluence = {
+        10: 0,
+        11: 0,
+        12: 0,
+        13: 0,
+        14: 0,
+        15:0
+    }
+
+    for(sale of rows){
+        for(let i = 10; i <=15; i++){
+            let hour = sale.date;
+            hour = hour.substring(11, 13);
+            hour = parseInt(hour);
+            hour += 1;
+            if(hour == i){
+                clientAffluence[hour] += 1;
+            }
+        }
+    }
+    return clientAffluence;
+}
+
+const getSalesByMonth = (month)=> {
+
+        let sql = 'SELECT COUNT(clientID) AS numSales, clientID FROM Sale where year(date) = ? and month(date) = ? GROUP BY clientID;';
+        let date = new Date();
+        let year = parseInt(date.getFullYear());
+        let params = [year, month]
+        return new Promise((resolve, reject) => {
+            var query = connection.query(sql,params, function (error, results, fields) {
+            let rows = JSON.parse(JSON.stringify(results))
+            resolve(rows);
+            });
+        });
+
+
+}
+
+const getRegularClients = () =>{
+    console.log("fui chamado")
+    let sales = {};
+    return new Promise((resolve, reject) => {
+        let date = new Date();
+        let year = parseInt(date.getFullYear());
+        for(let month = 1; month<=12; month++){
+            this.getSalesByMonth(month).then((rows) => {
+                let regularClients = 0;
+                let nonRegularClients = 0;
+                for(sale of rows){
+                    if(sale.numSales >= 6){
+                        regularClients += 1;
+                    }else nonRegularClients += 1;
+                }
+                let entry = {regularClients, nonRegularClients};
+                sales[month] = entry;
+                if(month == 12) resolve(sales);
+            })
+             
+        }
+    });
+}
+
+const getYearlyEarnings = (res) => {
+    let sql = 'SELECT SUM(price) AS total  FROM Ticket INNER JOIN Sale ON Ticket.ticketID = Sale.ticketID WHERE year(date) = ?';
+    let date = new Date();
+    let year = parseInt(date.getFullYear());
+    var query = connection.query(sql,year, function (error, results, fields) {
+        let rows = JSON.parse(JSON.stringify(results))
+        res.send(rows[0])
+    });
+
+}
+
+const getMonthlyEarnings = (res) => {
+    let sql = 'SELECT SUM(price) AS total  FROM Ticket INNER JOIN Sale ON Ticket.ticketID = Sale.ticketID WHERE year(date) = ? and month(date) = ?';
+    let date = new Date();
+    let monthJS = date.getMonth();
+    let month = parseInt(monthJS) + 1
+    let year = parseInt(date.getFullYear())
+    let params = [year, month]
+    var query = connection.query(sql,params, function (error, results, fields) {
+        let rows = JSON.parse(JSON.stringify(results))
+        res.send(rows[0])
+    });
+
+}
+
+const getDailyEarnings = (res) => {
+    let sql = 'SELECT SUM(price) AS total  FROM Ticket INNER JOIN Sale ON Ticket.ticketID = Sale.ticketID WHERE year(date) = ? and month(date) = ? and day(date) = ?';
+    let date = new Date();
+    let day = date.getDate();
+    let monthJS = date.getMonth();
+    let month = parseInt(monthJS) + 1
+    let year = parseInt(date.getFullYear());
+    let params = [year, month,day]
+    var query = connection.query(sql,params, function (error, results, fields) {
+        let rows = JSON.parse(JSON.stringify(results))
+        res.send(rows[0])
+    });
+
+}
+
+const countValid = (sales) =>{
+    let tickets = {
+        valid : 0,
+        invalid : 0
+    }
+    for(sale of sales){
+        if(sale.validated != null){
+            tickets.valid += 1;
+            tickets.invalid += sale.invalid;
+        }
+    }
+    return tickets;
+}
+const countTickets =  (sales) => {
     let tickets = {
         simples : 0,
         completa : 0,
@@ -125,3 +254,11 @@ function prepareEntry(items, clientID, date, invoiceID) {
 exports.insert = insert;
 exports.select = select;
 exports.getAll = getAll;
+exports.countTickets = countTickets;
+exports.countValid = countValid;
+exports.getClientAffluence = getClientAffluence;
+exports.getSalesByMonth = getSalesByMonth
+exports.getRegularClients = getRegularClients
+exports.getDailyEarnings = getDailyEarnings
+exports.getMonthlyEarnings = getMonthlyEarnings
+exports.getYearlyEarnings = getYearlyEarnings

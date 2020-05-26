@@ -3,9 +3,11 @@ window.onload = function(){
     this.getHistory().then(tickets => populate(tickets))
 }
 async function getHistory(){
-  let response = await fetch('http://localhost:5000/test/history/clientisiticket@gmail.com');
-  let data = await response.json()
-  return data;
+    let profile = JSON.parse(localStorage.getItem('profile'));
+    let email = profile.email;
+    let response = await fetch(`http://localhost:5000/test/history/${email}`);
+    let data = await response.json()
+    return data;
 }
 
 function populate(tickets){
@@ -15,7 +17,6 @@ function populate(tickets){
     console.log(tickets);
     for(ticket of tickets){
         let image = setImage(ticket.ticketID)
-
             index += 1;
             let date = ticket.date.substring(0,10);
             page = 
@@ -42,8 +43,6 @@ function validationDate(date){
         return `Usado em: ${date}`
     }
 }
-
-
 
 function setImage(ticketID){
     switch (ticketID){
