@@ -1,10 +1,2 @@
-api_keys.js
-moloni_login.js
-connection.js
-jasmin_login.js
-paypal_auth.js
-jasmin_org.js
-nodemailer.js
-
 .vscode
 ./back_end/node_modules

@@ -1,6 +1,6 @@
 const gmailCreds = {
-    user : 'isiticketbusiness@gmail.com',
-    pass : 'isiticketbusiness123'
+    user : process.env.nodemailer_user,
+    pass : process.env.nodemailer_pass
 }
 
 module.exports = gmailCreds;
