@@ -24,7 +24,11 @@ app.use('/paypal', require('./routes/paypal.js'));
 app.use('/paypalV2', require('./routes/paypalV2.js'));
 app.use('/test', require('./routes/testRoute'));
 app.use('/moloni', require('./routes/moloniTeste'));
-app.use('/admin', require('./routes/adminRoute'))
+app.use('/admin', require('./routes/adminRoute'));
+
+app.get('/', (req, res) => {
+  res.send("Hello from isi-ticket-api!");
+});
 
 const PORT = process.env.PORT || 5000;
 
