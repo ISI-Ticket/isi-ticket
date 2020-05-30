@@ -1,4 +1,3 @@
 build:
     docker:
       web: back_end/Dockerfile
-      worker: back_end/Dockerfile
