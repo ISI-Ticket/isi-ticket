@@ -2,9 +2,7 @@
          * Simple Encapsulation Class template
          */
         (function(root) {
-
             "use strict";
-
             /**
              * Common object params
              * @type {Object}
@@ -13,152 +11,83 @@
                     publicMethods: ['validate', 'formatString', 'destroy', 'reload', 'getFormHandle', 'getFields', 'showErrors', 'hideErrors'],
                     className: 'Validator'
                 },
-
                 // main constructor
                 Protected = function(formHandle, submitCallback, settings) {
-
                     formHandle.JsValidator = this;
-
                     this.settings = {
-
                         // Validation of a current field after the events of "change", "keyup", "blur"
                         onAir: true,
-
                         // Show validation errors
                         showErrors: true,
-
                         // Auto-hide the error messages
                         autoHideErrors: false,
-
                         // Timeout auto-hide error messages
                         autoHideErrorsTimeout: 2000,
-
                         // Language error messages
                         locale: 'en',
-
                         // Object for custom error messages
                         messages: {},
-
                         // Object for custom rules
                         rules: {},
-
                         // classname for error messages
                         errorClassName: 'error',
-
                         // remove spaces from validation field values
                         removeSpaces: false,
-
                         // tracking of new elements
                         autoTracking: true,
-
                         // events list for binding
                         eventsList: ['keyup', 'change', 'blur']
                     };
-
-
-
-
-
-
-
-
-
-
-
                     var self = this;
-
                     // set handle
                     this.formHandle = formHandle || null;
-
                     // set callback
                     this.submitCallback = submitCallback || null;
-
                     // get fields and rules
                     this.fields = this.getFields(this.formHandle.querySelectorAll('[data-rule]'));
-
-
-
-
-
                     // apply custom settings
                     this.applySettings(settings || {});
-
-
-
-
-
-
                     this.submitCallback = this.submitCallback.bind(this);
                     this._eventChangeWithDelay = this._eventChangeWithDelay.bind(this);
                     this._eventChange = this._eventChange.bind(this);
                     this._eventSubmit = this._eventSubmit.bind(this);
-
-
-
                     // bind events
                     this.submitCallback && this.eventsBuilder('addEventListener');
-
-
-
-
-
-
-
                     // autotracking for new form elements
                     this.settings.autoTracking && ('MutationObserver' in window) && new MutationObserver(function(mutationRecords) {
-
                         [].forEach.call(mutationRecords, function(mutation) {
                             switch (mutation.type) {
                                 case 'subtree':
                                 case 'childList':
-
                                     var reloadFlag = false,
                                         childsArray = [];
-
                                     [].forEach.call(mutation.addedNodes, function(targetElem) {
-
                                         childsArray = targetElem.querySelectorAll ? targetElem.querySelectorAll('*') : [];
-
                                         if (['SELECT', 'INPUT', 'TEXTAREA', 'CHECKBOX', 'RADIOBUTTON'].indexOf(targetElem.tagName) !== -1) {
                                             reloadFlag = true;
                                         };
-
                                         !reloadFlag && [].forEach.call(childsArray, function(elem) {
                                             if (['SELECT', 'INPUT', 'TEXTAREA', 'CHECKBOX', 'RADIOBUTTON'].indexOf(elem.tagName) !== -1) {
                                                 reloadFlag = true;
                                             }
                                         });
-
-
                                     });
                                     reloadFlag && self.reload();
                                     break;
                             }
                         });
-
                     }).observe(this.formHandle, {
                         childList: true,
                         subtree: true
                     });
-
-
-
                     return this;
                 };
-
-
             /**
              * Main prototype
              * @type {Object}
              */
             Protected.prototype = {
-
-
-
-
-
                 messages: {
-
                     // English
                     en: {
                         required: {
@@ -194,8 +123,25 @@
                             incorrect: 'Nome incorreto'
                         },
                         lastname: {
-                            empty: 'Please, enter your lastname',
-                            incorrect: 'Incorrect lastname'
+                            empty: 'Insira o seu apelido',
+                            incorrect: 'Apelido incorreto'
+                        },
+                        address: {
+                            empty: 'Insira o seu endereço',
+                            incorrect: 'Endereço incorreto'
+                        },
+
+                        city: {
+                            empty: 'Insira a sua cidade',
+                            incorrect: 'Cidade incorreta'
+                        },
+                        zip: {
+                            empty: 'Insira o seu código postal',
+                            incorrect: 'Código postal incorreto'
+                        },
+                        nif: {
+                            empty: 'Insira o seu NIF',
+                            incorrect: 'NIF incorreto'
                         },
                         phone: {
                             empty: 'Insira o número do seu telemóvel',
@@ -227,7 +173,6 @@
                         }
                     }
                 },
-
                 // rules
                 rules: {
                     required: function(value) {
@@ -256,7 +201,6 @@
                         return parseInt(value, 10) <= parseInt(params[0], 10);
                     },
                     between: function(value, params) {
-
                         params[1] = params[1] || 999999;
 
                         if (this.float(value)) {
@@ -267,13 +211,25 @@
                         }
                         return false;
                     },
+                    nif: function(value) {
+                        return this.required(value);
+                    },
                     name: function(value) {
                         if (value.length > 0 && value.length < 2) {
                             return false;
                         }
                         return new RegExp(/^[a-zA-Z\sа-яА-ЯёЁ\-]+$/g).test(value);
                     },
+                    zip: function(integer) {
+                        return this.integer(value);
+                    },
                     lastname: function(value) {
+                        return this.name(value);
+                    },
+                    address: function(value) {
+                        return this.name(value);
+                    },
+                    city: function(value) {
                         return this.name(value);
                     },
                     phone: function(value) {
@@ -298,35 +254,28 @@
                         var i,
                             l = value.length,
                             unitsOffset = 1;
-
                         switch (params[1].toLowerCase()) {
                             case 'b':
                                 unitsOffset = 1;
                                 break;
-
                             case 'kb':
                                 unitsOffset = 1024;
                                 break;
-
                             case 'mb':
                                 unitsOffset = 1048576;
                                 break;
-
                             case 'gb':
                                 unitsOffset = 1073741824;
                                 break;
-
                             case 'tb':
                                 unitsOffset = 1099511627776;
                                 break;
                         }
-
                         for (i = 0; i < l; i += 1) {
                             if (parseFloat(value[i]) > (parseFloat(params[0]) * unitsOffset)) {
                                 return false;
                             }
                         }
-
                         return true;
                     },
                     fileextension: function(value, params) {
@@ -335,7 +284,6 @@
                             l = params.length,
                             b = value.length,
                             cmpResC = 0;
-
                         for (i = 0; i < l; i += 1) {
                             for (a = 0; a < b; a += 1) {
                                 if (params[i] === value[a].split('.').pop()) {
@@ -343,13 +291,10 @@
                                 }
                             }
                         }
-
                         return value.length === cmpResC ? true : false;
                     }
                 },
-
                 orderFields: function(attrName, attrValue) {
-
                     var self = this,
                         retObj = {};
 
@@ -362,46 +307,32 @@
                     return retObj;
                 },
                 _eventSubmit: function(e) {
-
                     e.preventDefault();
-
                     //hide errors
                     this.hideErrors(false, true);
-
                     //show errors if validation failure
                     !this.validate() && this.showErrors();
-
                     //callback
                     (this.submitCallback(this.errors || null, this.errors ? false : true) === true) && this.formHandle.submit();
                 },
                 _eventChange: function(e) {
-
                     var radioBtns,
                         self = this;
-
                     //remove spaces
                     if (this.settings.removeSpaces && new RegExp(/\s{2,}/g).test(e.target.value)) {
                         e.target.value = e.target.value.replace(/\s{2,}/g, ' ');
                     }
-
                     //if is radio buttons
                     if (e.target.type === 'radio') {
-
                         //get radio groupe
                         radioBtns = this.orderFields('name', e.target.name);
-
                         Object.keys(radioBtns).forEach(function(btn) {
                             self.hideErrors(radioBtns[btn].handle);
                         });
-
                     } else {
                         //hide errors for this
                         this.hideErrors(e.target);
                     }
-
-
-
-
                     //validate and show errors for this
                     if (!this.validate(e.target)) {
 
@@ -412,26 +343,19 @@
                 },
                 _eventChangeWithDelay: function(e) {
                     var self = this;
-
                     if (this.intervalID) {
                         clearTimeout(this.intervalID);
                     }
-
                     this.intervalID = setTimeout(function() {
                         self._eventChange.apply(self, [e]);
                     }, 400);
                 },
-
-
                 applySettings: function(settings) {
-
                     var self = this;
-
                     // apply rules
                     settings.rules && Object.keys(settings.rules).forEach(function(ruleName) {
                         self.rules[ruleName] = settings.rules[ruleName];
                     });
-
                     // apply messages
                     settings.messages && Object.keys(settings.messages).forEach(function(locale) {
                         Object.keys(settings.messages[locale]).forEach(function(ruleName) {
@@ -442,38 +366,26 @@
                             });
                         });
                     });
-
                     // apply other settings
                     Object.keys(settings).forEach(function(param) {
                         self.settings[param] = settings[param];
                     });
-
                     return this;
                 },
-
-
                 getFields: function(fields) {
-
                     var retData = {},
                         rules = [],
                         params = [];
-
                     fields = fields || this.formHandle.querySelectorAll('[data-rule]');
-
                     // each fields with data-rule attribute
                     Object.keys(fields).forEach(function(fieldIndex) {
-
                         rules = fields[fieldIndex].getAttribute('data-rule').split('|');
-
                         Object.keys(rules).forEach(function(ruleIndex) {
-
                             // parse rule
                             if (rules[ruleIndex].match(/-/gi)) {
-
                                 params = rules[ruleIndex].split('-');
                                 rules[ruleIndex] = params[0];
                                 params = params.splice(1);
-
                                 rules[ruleIndex] = [rules[ruleIndex], params];
                             } else {
                                 rules[ruleIndex] = [rules[ruleIndex],
@@ -481,7 +393,6 @@
                                 ];
                             }
                         });
-
                         retData[fieldIndex] = {
                             name: fields[fieldIndex].getAttribute('name'),
                             rules: rules,
@@ -490,12 +401,9 @@
                             intervalID: null
                         };
                     });
-
                     return retData;
                 },
-
                 validate: function(validationField) {
-
                     var self = this,
                         fields = validationField ? this.getFields([validationField]) : this.fields,
                         result,
@@ -505,40 +413,28 @@
                         value,
                         message,
                         messageType = null;
-
                     this.errors = this.errors ? null : this.errors;
-
                     Object.keys(fields).forEach(function(n) {
-
                         result = true;
-
                         // loop rules of this field
                         fields[n].rules && Object.keys(fields[n].rules).forEach(function(ruleIndex) {
-
                             // set rule data
                             ruleName = fields[n].rules[ruleIndex][0];
                             params = fields[n].rules[ruleIndex][1];
                             defaultValue = fields[n].defaultValue;
                             value = fields[n].handle.value;
-
-
                             switch (fields[n].handle.type) {
-
                                 case 'checkbox':
                                     !fields[n].handle.checked && (value = '');
                                     break;
-
                                 case 'radio':
                                     // get radio groupe
                                     var radioBtns = self.orderFields('name', fields[n].handle.name),
                                         checked = false;
-
                                     Object.keys(radioBtns).forEach(function(i) {
                                         radioBtns[i].handle.checked && (checked = true);
                                     });
-
                                     if (!checked) {
-
                                         // add an error to one element
                                         Object.keys(radioBtns).forEach(function(i) {
                                             try {
@@ -547,75 +443,54 @@
                                                 message = self.messages[self.settings.locale][ruleName].empty;
                                             }
                                         });
-
                                         // set value as for empty rules
                                         value = '';
                                     }
                                     break;
-
                                 case 'file':
-
                                     // if the files were selected
                                     if (fields[n].handle.files && fields[n].handle.files.length) {
-
                                         value = [];
-
                                         Object.keys(fields[n].handle.files).forEach(function(fileIndex) {
-
                                             switch (ruleName) {
                                                 case 'maxfilesize':
                                                     value.push(fields[n].handle.files[fileIndex].size);
                                                     break;
-
                                                 case 'fileextension':
                                                     value.push(fields[n].handle.files[fileIndex].name);
                                                     break;
                                             }
                                         });
-
                                     }
-
                                     break;
                             }
-
-
                             if (result && !(value === '' && !fields[n].rules.join('|').match(/\|{0,1}required\|{0,1}/))) {
-
                                 // if exist default value and value is eq default
                                 if (result && defaultValue && value !== defaultValue) {
-
                                     result = false;
                                     messageType = 'incorrect';
-
                                     // if default value not exist
                                 } else if (result && self.rules[ruleName] && !self.rules[ruleName](value, params)) {
-
                                     // set message to empty data
                                     if ('' === value) {
                                         result = false;
                                         messageType = 'empty';
-
                                         // set message to incorrect data
                                     } else {
                                         result = false;
                                         messageType = 'incorrect';
                                     }
                                 }
-
                                 if (result) {
                                     self.hideErrors(fields[n].handle, true);
-
                                 } else {
-
                                     // define errors stack if not exist
                                     self.errors = self.errors || {};
-
                                     // append error messages
                                     if (ruleName === 'required' && fields[n].rules[1] && fields[n].rules[1][0]) {
                                         ruleName = fields[n].rules[1][0];
                                         messageType = 'empty';
                                     }
-
                                     try {
                                         try {
                                             message = self.settings.messages[self.settings.locale][ruleName][messageType];
@@ -626,16 +501,13 @@
                                         ruleName = 'required';
                                         message = self.messages[self.settings.locale][ruleName][messageType];
                                     }
-
                                     // push value into params if params is empty
                                     !params.length && params.push(value);
-
                                     // add errors
                                     self.errors[n] = {
                                         name: fields[n].name,
                                         errorText: self.formatString(message, params)
                                     };
-
                                     // call callback if exist
                                     if (!self.submitCallback) {
                                         self.errors[n].handle = fields[n].handle;
@@ -644,53 +516,35 @@
                             }
                         });
                     });
-
-
                     // run callback if callback is exists and not errors or return error data object
                     if (this.submitCallback) {
                         return (this.errors) ? false : true;
                     }
-
                     return this.errors || true;
-
                 },
-
-
                 hideErrors: function(validationField, removeClass) {
-
                     var self = this,
                         errorDiv;
-
-
                     Object.keys(this.fields).forEach(function(n) {
                         if ((validationField && validationField === self.fields[n].handle) || !validationField) {
-
                             errorDiv = self.fields[n].handle.nextElementSibling;
-
                             // remove class error
                             removeClass && self.fields[n].handle.classList.remove(self.settings.errorClassName);
-
                             // remove error element
                             errorDiv && (errorDiv.getAttribute('data-type') === 'validator-error') && errorDiv.parentNode.removeChild(errorDiv);
                         }
                     });
-
                 },
-
                 showErrors: function(validationField) {
-
                     var self = this,
                         errorDiv,
                         insertNodeError = function(refNode, errorObj) {
-
                             // set error class
                             refNode.classList.add(self.settings.errorClassName);
-
                             // check to error div element exist
                             if (refNode.nextElementSibling && refNode.nextElementSibling.getAttribute('data-type') === 'validator-error') {
                                 return;
                             }
-
                             // insert error element
                             if (self.settings.showErrors) {
                                 errorDiv = document.createElement('div');
@@ -700,19 +554,13 @@
                                 refNode.parentNode.insertBefore(errorDiv, refNode.nextSibling);
                             }
                         };
-
-
-
-
                     Object.keys(this.errors).forEach(function(r) {
 
                         // show error to specified field
                         if (validationField) {
-
                             Object.keys(self.fields).forEach(function(n) {
                                 (self.fields[n].handle.getAttribute('name') === validationField.getAttribute('name')) && insertNodeError(self.fields[n].handle, self.errors[r]);
                             });
-
                             // show error to all fields
                         } else {
                             if (r === '0' || (r > 0 && self.fields[r].name !== self.fields[r - 1].name)) {
@@ -720,21 +568,13 @@
                             }
                         }
                     });
-
-
-
-
-
                     // auto hide errors
                     if (this.settings.autoHideErrors) {
-
                         // for all fields
                         if (!validationField) {
-
                             if (this.intervalID) {
                                 clearTimeout(this.intervalID);
                             }
-
                             this.intervalID = setTimeout(function() {
                                 self.intervalID = null;
                                 self.hideErrors(false);
@@ -742,11 +582,9 @@
 
                             // for current field
                         } else {
-
                             if (validationField.intervalID) {
                                 clearTimeout(validationField.intervalID);
                             }
-
                             if (!this.intervalID) {
                                 validationField.intervalID = setTimeout(function() {
                                     validationField.intervalID = null;
@@ -756,8 +594,6 @@
                         }
                     }
                 },
-
-
                 /*
                  * Get Form handle
                  * @return {element} - Form handle
@@ -765,7 +601,6 @@
                 getFormHandle: function() {
                     return this.formHandle;
                 },
-
                 /*
                  * Formatting string. Replace string
                  * @param {string} string - Source string. Example: "{0} age {1} years."
@@ -777,7 +612,6 @@
                         return (match && params[number]) ? params[number] : '';
                     });
                 },
-
                 /*
                  * Destroy validator
                  */
@@ -790,7 +624,6 @@
                     this.eventsBuilder('removeEventListener');
 
                 },
-
                 /*
                  * Reload validator.
                  * Example 1: reload(function (err, res) {...}, {autoHideErrors: false})
@@ -809,27 +642,19 @@
                             this.submitCallback = submitCallback;
                             this.settings = settings;
                             break;
-
                         case 1:
                             this.settings = submitCallback;
                             break;
                     }
-
                     this.fields = this.getFields(this.formHandle.querySelectorAll('[data-rule]'));
                     this.submitCallback && this.eventsBuilder('addEventListener');
                     this.applySettings(settings || {});
-
                 },
                 eventsBuilder: function(actionName) {
-
                     var self = this;
-
-
                     this.formHandle[actionName]('submit', this._eventSubmit);
-
                     // air mode
                     this.settings.onAir && Object.keys(this.fields).forEach(function(field) {
-
                         [].forEach.call(self.settings.eventsList, function(event) {
 
                             if (event === 'keyup') {
@@ -839,11 +664,8 @@
                             }
                         });
                     });
-
-
                 }
             };
-
             /**
              * Encapsulation
              * @return {Object} - this handle
@@ -868,8 +690,6 @@
                         return original[member].apply(original, arguments);
                     };
                 });
-
                 return new Publicly(arguments);
             };
-
         }(this));
