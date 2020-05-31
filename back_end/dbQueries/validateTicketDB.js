@@ -36,10 +36,19 @@ function validateTicket(saleID,ticketID, res){
 function checkStatus(status,ticketID, saleID, res){
 
     let data = {status : false,msg : ''}
-    if(status == false)res.send(data);
+    if(status == false){
+      updateInvalid(saleID)
+      res.send(data);
+    }
     else validateTicket(saleID,ticketID, res);
 }
 
+function updateInvalid(saleID){
+  let sql = "UPDATE Sale SET invalid = invalid + 1 where saleID = ?"
+  let query = connection.query(sql, saleID, function (error, results, fields) {
+    if (error) throw error;
+  });
+}
 
 function checkTicket(ticketID){
     switch(ticketID){
@@ -50,7 +59,8 @@ function checkTicket(ticketID){
       case 3:
         return "Senha Grill";
       case 4:
-        return "Senha Rampa B";       
+        return "Senha Rampa B";
+       
     }
 }
 

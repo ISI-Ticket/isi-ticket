@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/jasmin', require('./routes/jasmin'));
 app.use('/user', require('./routes/userRoute.js'));
-app.use('/employee', require('./routes/validateTicket.js'));
+app.use('/employee', require('./routes/employeeRoute.js'));
 app.use('/paypal', require('./routes/paypal.js'));
 app.use('/paypalV2', require('./routes/paypalV2.js'));
 app.use('/test', require('./routes/testRoute'));
