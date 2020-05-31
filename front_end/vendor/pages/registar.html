@@ -45,45 +45,38 @@
     <!-- content -->
     <div class="recipes container grey-text text-darken-1" style="height: auto; width: auto;">
         <div class="recipes container grey-text text-darken-1" style="height: auto; width: auto;">
+
             <form id="signUpForm" name="signUpForm">
                 <br>
-                <h6 class="placeholder1">E-mail:</h6>
-                <!--   <input id="email" type="text" value="" name="uname">-->
-                <input type="email" class="form-control" id="email" name="email" data-rule="required|email">
+                <label for="username">E-mail::</label>
+                <input type="email" id="email" data-rule="required|email">
                 <br>
-                <h6 class="placeholder1">Nome:</h6>
-                <!--  <input id="firstname" type="text" value="" name="uname">-->
-                <input type="text" class="form-control" id="firstname" name="name" data-rule="required|name">
+                <label for="username">Nome:</label>
+                <input type="text" id="firstname" required data-rule="required|name">
                 <br>
-                <h6 class="placeholder1">Apelido:</h6>
-                <!-- <input id="lastname" type="text" value="" name="uname">-->
-                <input type="text" class="form-control" id="lastname" name="name" data-rule="required|lastname">
+                <label for="username">Apelido:</label>
+                <input type="text" id="lastname" required data-rule="required|lastname">
                 <br>
-                <h6 class="placeholder1">NIF:</h6>
-                <!--  <input id="nif" type="text" value="" name="uname">-->
-                <input type="number" class="form-control" id="nif" name="nif" data-rule="required|nif">
+                <label for="username">NIF:</label>
+                <input type="text" id="nif" required data-rule="required|nif">
                 <br>
-                <h6 class="placeholder1">Telemóvel:</h6>
-                <!--   <input id="phone" type="text" value="" name="uname">-->
-                <input type="number" class="form-control" id="phone" name="phone" data-rule="required|phone">
+                <label for="username">Telemóvel:</label>
+                <input type="text" id="phone" required data-rule="required|phone">
                 <br>
-                <h6 class="placeholder1">Endereço:</h6>
-                <!--  <input id="address" type="text" value="" name="uname">-->
-                <input type="text" class="form-control" id="address" name="name" data-rule="required|address">
+                <label for="username">Endereço:</label>
+                <input type="text" id="address" required data-rule="required|address">
                 <br>
-                <h6 class="placeholder1">Cidade:</h6>
-                <!--  <input id="city" type="text" value="" name="uname">-->
-                <input type="text" class="form-control" id="city" name="name" data-rule="required|city">
+                <label for="username">Cidade:</label>
+                <input type="text" id="city" required data-rule="required|city">
                 <br>
-                <h6 class="placeholder1">Código Postal:</h6>
-                <!--   <input id="zip" type="text" value="" name="uname"> -->
-                <input type="number" class="form-control" id="zip" name="name" data-rule="required|zip">
+                <label for="username">Código Postal:</label>
+                <input type="text" id="zip" required data-rule="required|zip">
                 <br>
-                <br>
-                <button type="submit">Registar</button>
-
+                <input type="submit">
                 <button class="btn btn-primary btn-purchase" style="height:fit-content" type="button" onclick="register()">Registar</button>
             </form>
+
+
             <p style="color: white;">p</p>
         </div>
     </div>
