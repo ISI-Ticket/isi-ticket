@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 
 const credentials = {
     client_id : process.env.jasmin_clientID,
