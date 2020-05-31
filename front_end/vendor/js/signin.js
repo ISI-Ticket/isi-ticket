@@ -104,7 +104,7 @@ function facebookLogout() {
 
 async function signInApi(data) {
     try {
-        let response = await fetch("https://isi-ticket-api.herokuapp.com/signin", {
+        let response = await fetch("https://isi-ticket-api.herokuapp.com/user/signin", {
             headers: { 'Content-Type': 'application/json' },
             method: 'POST',
             body: JSON.stringify(data)
