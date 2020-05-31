@@ -72,7 +72,7 @@ router.get('/success/:total', (req, res) => {
                     }
                 })
             })
-            res.redirect('http://localhost:5500/isi-ticket/front_end/vendor/pages/carteira.html');
+            res.redirect("https://isi-ticket.herokuapp.com/vendor/pages/carteira.html");
         }
     });
 });
@@ -91,7 +91,7 @@ function setOptions(options, cart) {
                     options.transactions[0].description = `Compra feita com sucesso no dia ${date}`;
                     let total = data.add;
                     options.transactions[0].amount.total = total.toString();
-                    options.redirect_urls.return_url = `http://127.0.0.1:5000/paypalV2/success/${total.toString()}`;
+                    options.redirect_urls.return_url = `https://isi-ticket-api.herokuapp.com/paypalV2/success/${total.toString()}`;
                     resolve(options);
                 }
             })
