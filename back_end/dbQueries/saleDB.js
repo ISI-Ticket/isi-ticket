@@ -239,7 +239,7 @@ function prepareEntry(items, clientID, date, invoiceID) {
     for (item of items) {
         for (let i = 0; i < item.quantity; i++) {
             if(parseInt(item.sku) == 5){
-                for(let a = 0; i < item.quantity * 10; i++){
+                for(let a = 0; a < item.quantity * 10; a++){
                     let sale = [];
                     sale.push(date);
                     sale.push(true);
