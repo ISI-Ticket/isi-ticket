@@ -97,7 +97,7 @@ function getProducts(items, total){
                 product.name = "Pack de senhas";
                 product.summary =  "Pack de 10 senhas simples";
                 product.qty = item.quantity;
-                product.price = 26.50;
+                product.price = 18.00;
                 product.exemption_reason = "M20";
                 products.push(product);
                 break;
