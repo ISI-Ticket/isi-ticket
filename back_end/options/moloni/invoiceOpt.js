@@ -92,6 +92,15 @@ function getProducts(items, total){
                 product.exemption_reason = "M20";
                 products.push(product);
                 break;
+            case '006':
+                product.product_id = 55348628;
+                product.name = "Pack de senhas";
+                product.summary =  "Pack de 10 senhas simples";
+                product.qty = item.quantity;
+                product.price = 26.50;
+                product.exemption_reason = "M20";
+                products.push(product);
+                break;
         }
 
     }

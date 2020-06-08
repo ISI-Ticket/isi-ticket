@@ -153,12 +153,21 @@ function cycle(cart) {
                 itemsFinal.push(itemObj);
                 break;
             case '5':
-                itemObj.name = "Pack senhas";
+                itemObj.name = "Pack senhas completas";
                 itemObj.sku = "005";
                 itemObj.price = "26.50"
                 itemObj.currency = "EUR";
                 itemObj.quantity = item.quantity
                 add += +(26.50 * item.quantity).toFixed(2);;
+                itemsFinal.push(itemObj);
+                break;
+            case '6':
+                itemObj.name = "Pack senhas simples";
+                itemObj.sku = "006";
+                itemObj.price = "18.00"
+                itemObj.currency = "EUR";
+                itemObj.quantity = item.quantity
+                add += +(18.00 * item.quantity).toFixed(2);;
                 itemsFinal.push(itemObj);
                 break;
         }
