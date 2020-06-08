@@ -1,44 +1,80 @@
-<!DOCTYPE html>
+<!DOCTYPE html5>
+
+
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ISI TICKET</title>
-    <!-- materialize icons, css & js -->
+    <title>ISI Ticket</title>
+    <!-- materialize icons,font-awesome icos css & js -->
+    <link rel="icon" type="image/png" sizes="32px32" href="../img/icons/icon-72x72.png">
+    <link rel="icon" type="image/png" sizes="16px16" href="../img/icons/icon-72x72.png">
+    <link rel="manifest" href="/manifest.json">
     <link type="text/css" href="../css/materialize.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" href="../css/styles.css" rel="stylesheet">
-    <link href="../css/styles.css">
-    <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <link rel="manifest" href="../manifest.json">
-    <link rel="stylesheet" href="../css/style2.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fontawesome.com/v4.7.0/get-started/get-started-cdn/">
+    <link rel="stylesheet" href="../css/styles.css" />
     <!-- ios support -->
     <link rel="apple-touch-icon" href="../img/icons/icon-96x96.png">
-    <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
-    <meta name="theme-color" content="#FFE1C4">
+    <meta name="apple-mobile-web-app-status-bar" content="#e33742">
+    <meta name="theme-color" content="#e33742">
+    <link rel="stylesheet" href="../css/style2.css" />
 </head>
 
-<body class="grey lighten-4">
+<body>
 
-    <!-- top nav -->
-    <nav class="z-depth-0">
-        <div class="nav-wrapper container">
-            <!--   <a href="../pages/pagamento.html">ISI<span>TICKET</span></a> -->
-            <a href="../pages/pagamento.html" class="navbartexto" style="font-size: medium;">ISI <span style="color:white"> TICKET</span></a>
-
-            <h5 class="titulo2">ESTATÍSTICAS</h5>
-            <span class="right grey-text text-darken-1">
-      </span>
-        </div>
-    </nav>
+    <!-- header -->
+    <div class="header-container">
+        <header>
+            <div class="header-title-container">
+                <a href="../pages/pagamento.html" class="header-title">ISI TICKET</a>
+            </div>
+            <div class="header-page-text-container">
+                <h5 class="header-page-text">ESTATÍSTICAS</h5>
+            </div>
+        </header>
+    </div>
 
     <!-- content -->
+    <div class="content-container">
+        <main>
+            <div class="cards-header">
+            </div>
+            <br>
+
+            <div class="ganhodiario">
+
+                <h1 class="ganhomensaltitle">Ganho Diário</h1>
+                <div class="resposta" id='dailyEarnings'><br>1200€</div>
+            </div>
+            <br>
+
+            <div class="ganhomensal">
+                <h1 class="ganhomensaltitle">Ganho Mensal</h1>
+                <div class="resposta" id='monthlyEarnings'><br>12000€</div>
+            </div>
+            <br>
+            <div class="ganhoanual">
+                <h1 class="ganhomensaltitle">Ganho Anual</h1>
+                <div class="resposta" id='yearlyEarnings'><br>120000€</div>
+            </div>
+
+
+
+            <h2 style="color: white"><br /><br /><br /><br /><br /></h2>
+        </main>
+    </div>
+
+
+    <!-- content 
     <div class="center">
 
         <div class="container">
-            <div class="ganhodiario">
+             <div class="ganhodiario">
 
                 <h1 class="ganhomensaltitle">Ganho Diário</h1>
                 <div class="resposta" id='dailyEarnings'>1200€</div>
@@ -56,6 +92,8 @@
 
         </div>
     </div>
+    -->
+
 
     <br>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -76,5 +114,7 @@
     <div id="chart_div" style="width: 600px; height: 500px;"></div>
 
     <div id="series_chart_div" style="width: 600px; height: 500px;"></div>
+
+</body>
 
 </html>
