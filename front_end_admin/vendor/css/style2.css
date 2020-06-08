@@ -12,38 +12,41 @@
     font-family: Raleway;
     color: black;
 }
-.titulo2{
+
+.titulo2 {
     color: white;
     font-size: 30px;
     letter-spacing: 4px;
     font-weight: none;
     margin-top: 50px;
     margin-left: 30px;
-
 }
-.titulo3{
+
+.titulo3 {
     color: black;
     font-size: 25px;
     letter-spacing: 4px;
     font-weight: none;
     margin-top: 50px;
     margin-left: 10px;
-
 }
-.navbartexto{
+
+.navbartexto {
     color: white;
     font-weight: bold;
     letter-spacing: 2px;
     margin-left: 325px;
 }
+
 html,
 body {
     margin: 0;
     padding: 0;
     min-height: 100%;
 }
-.material-icons{
-    color:black;
+
+.material-icons {
+    color: black;
 }
 
 .nav ul {
@@ -247,46 +250,63 @@ body {
     padding: 5px;
 }
 
-.ganhomensal{
-    border-radius: 1em;
+.ganhomensal {
     background-color: #a8dadc;
-    width: 400px;
+    position: relative;
+    border-radius: 8px;
+    margin: 0px;
+    padding: 0px;
     box-shadow: 0px 1px 3px rgba(90, 90, 90, 1);
-    
+    display: grid;
+    grid-template-columns: 2fr 6fr;
+    grid-template-areas: "image details delete";
+    margin: 0 10%;
 }
-.ganhodiario{
-    border-radius: 1em;
+
+.ganhodiario {
     background-color: #ffe66d;
-    width: 400px;
     box-shadow: 0px 1px 3px rgba(90, 90, 90, 1);
- 
-    
+    position: relative;
+    border-radius: 8px;
+    margin: 0px;
+    padding: 0px;
+    box-shadow: 0px 1px 3px rgba(90, 90, 90, 1);
+    display: grid;
+    grid-template-columns: 2fr 6fr;
+    grid-template-areas: "image details delete";
+    margin: 0 10%;
 }
-.ganhoanual{
-    border-radius: 1em;
+
+.ganhoanual {
+    position: relative;
+    border-radius: 8px;
+    margin: 0px;
+    padding: 0px;
+    box-shadow: 0px 1px 3px rgba(90, 90, 90, 1);
+    display: grid;
+    grid-template-columns: 2fr 6fr;
+    grid-template-areas: "image details delete";
+    margin: 0 10%;
     background-color: #f2d7ee;
-    width: 400px;
-    display: block;
-    box-shadow: 0px 1px 3px rgba(90, 90, 90, 1);
-    
-    
 }
-.resposta{
+
+.resposta {
     font-size: 20px;
     color: black;
     font-weight: none;
 }
-.ganhomensaltitle{
+
+.ganhomensaltitle {
     font-size: 20px;
     color: black;
     font-weight: none;
 }
+
 .shop-item-price {
     flex-grow: 1;
     color: #333;
 }
 
-  
 .shop-items {
     display: flex;
     flex-wrap: wrap;
@@ -406,5 +426,4 @@ body {
     font-size: 1.75em;
     color: #bd1e21;
     background-color: #ffffff;
-    
 }
