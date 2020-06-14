@@ -5,8 +5,6 @@ const contactsOpt = require('../options/hubspot/contactsOpt');
 
 
 router.post('/signin', (req,res)=>{
-    let data = contactsOpt.userInfo;
-    data.email = req.body.email;
     let options =  contactsOpt.findByEmail(req.body.email);
     let json = '';
     request(options, function (error, response, body) {
@@ -17,7 +15,7 @@ router.post('/signin', (req,res)=>{
             }
             res.send(nope);
         }else {
-            data = contactsOpt.userInfo(json.properties.email.value, json.properties.firstname.value,json.properties.lastname.value,json.properties.nif.value,json.properties.phone.value, json.properties.address.value, json.properties.city.value, json.properties.zip.value);
+            let data = contactsOpt.userInfo(json.properties.email.value, json.properties.firstname.value,json.properties.lastname.value,json.properties.nif.value,json.properties.phone.value, json.properties.address.value, json.properties.city.value, json.properties.zip.value);
             res.send(data);
         };
     }); 
