@@ -1,6 +1,6 @@
 async function getTickets() {
     // let response = await fetch('http://localhost:5000/test/getSales');
-    let response = await fetch('https://dashboard.heroku.com/apps/isi-ticket-api/test/getSales');
+    let response = await fetch('https://isi-ticket-api.herokuapp.com/test/getSales');
 
     let data = await response.json()
     return data;

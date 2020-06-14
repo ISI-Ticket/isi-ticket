@@ -3,7 +3,7 @@ google.charts.setOnLoadCallback(drawChart);
 
 async function getClientAffluence() {
     // let response = await fetch('http://localhost:5000/admin/getClientAffluence');
-    let response = await fetch('https://dashboard.heroku.com/apps/isi-ticket-api/admin/getClientAffluence');
+    let response = await fetch('https://isi-ticket-api.herokuapp.com/admin/getClientAffluence');
     let data = await response.json()
     return data;
 }

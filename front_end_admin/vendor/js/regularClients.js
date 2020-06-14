@@ -3,7 +3,7 @@ google.charts.setOnLoadCallback(drawSeriesChart);
 
 async function getRegularClients() {
     //   let response = await fetch('http://localhost:5000/admin/getRegularClients');
-    let response = await fetch('https://dashboard.heroku.com/apps/isi-ticket-api/admin/getRegularClients');
+    let response = await fetch('https://isi-ticket-api.herokuapp.com/admin/getRegularClients');
     let data = await response.json()
     console.log(data)
     return data;

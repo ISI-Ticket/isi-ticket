@@ -3,7 +3,7 @@ google.charts.setOnLoadCallback(drawBasic);
 
 async function getMonthlyClients() {
     //  let response = await fetch('http://localhost:5000/admin/monthlyClients');
-    let response = await fetch('https://dashboard.heroku.com/apps/isi-ticket-api/admin/monthlyClients');
+    let response = await fetch('https://isi-ticket-api.herokuapp.com/admin/monthlyClients');
     let data = await response.json()
     return data;
 }
