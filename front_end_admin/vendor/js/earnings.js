@@ -32,7 +32,7 @@ function populate() {
     let yearlyEarnings = document.getElementById("yearlyEarnings")
 
     this.getDailyEarnings().then(data => {
-        if (data.total != null) dailyEarnings.innerHTML = `<br>${data.total}€`;
+        if (data.total != null) dailyEarnings.innerHTML = `<br>Math.round(${data.total})€`;
         else dailyEarnings.innerHTML = '<br>0€'
     })
 
@@ -42,6 +42,7 @@ function populate() {
     })
 
     this.getYearlyEarnings().then(data => {
+        //    if (data.total != null) yearlyEarnings.innerHTML = `<br>Math.round(${data.total})€`;
         if (data.total != null) yearlyEarnings.innerHTML = `<br>${data.total}€`;
         else yearlyEarnings.innerHTML = '<br>0€'
     })
