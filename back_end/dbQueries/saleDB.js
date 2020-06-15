@@ -238,8 +238,19 @@ function prepareEntry(items, clientID, date, invoiceID) {
     let records = []
     for (item of items) {
         for (let i = 0; i < item.quantity; i++) {
-            if(parseInt(item.sku) == 5 || parseInt(item.sku) == 6){
-                for(let a = 0; a < item.quantity * 10; a++){
+            if(parseInt(item.sku) == 5){
+                for(let a = 0; a < (item.quantity * 10); a++){
+                    let sale = [];
+                    sale.push(date);
+                    sale.push(true);
+                    ticketID = 2;
+                    sale.push(ticketID);
+                    sale.push(parseInt(clientID));
+                    sale.push(invoiceID);
+                    records.push(sale);
+                }
+            }else if(parseInt(item.sku) == 6){
+                for(let a = 0; a < (item.quantity * 10); a++){
                     let sale = [];
                     sale.push(date);
                     sale.push(true);
@@ -249,15 +260,17 @@ function prepareEntry(items, clientID, date, invoiceID) {
                     sale.push(invoiceID);
                     records.push(sale);
                 }
+                 
+            }else{
+                let sale = [];
+                sale.push(date);
+                sale.push(true);
+                ticketID = parseInt(item.sku);
+                sale.push(ticketID);
+                sale.push(parseInt(clientID));
+                sale.push(invoiceID);
+                records.push(sale);
             }
-            let sale = [];
-            sale.push(date);
-            sale.push(true);
-            ticketID = parseInt(item.sku);
-            sale.push(ticketID);
-            sale.push(parseInt(clientID));
-            sale.push(invoiceID);
-            records.push(sale);
         }
     }
     return records;
