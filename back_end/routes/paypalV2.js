@@ -17,10 +17,10 @@ paypal.configure({
     'client_secret': paypalAuth.secret
 });
 
-router.post('/pay', (req, res) => {
+router.post('/pay/:email', (req, res) => {
     console.log("sou o v2")
     let options = paypalOptions.paymentJSON;
-    setOptions(options, req.body).then(options => {
+    setOptions(options, req.body, req.params.email).then(options => {
         paypal.payment.create(options, function (error, payment) {
             if (error) {
                 console.log(JSON.stringify(error))
@@ -77,7 +77,7 @@ router.get('/success/:total/:mail', (req, res) => {
     });
 });
 
-function setOptions(options, cart) {
+function setOptions(options, cart, email) {
     return new Promise(resolve => {
         let date = new Date();
 
@@ -91,7 +91,7 @@ function setOptions(options, cart) {
                     options.transactions[0].description = `Compra feita com sucesso no dia ${date}`;
                     let total = data.add;
                     options.transactions[0].amount.total = total.toString();
-                    options.redirect_urls.return_url = `https://isi-ticket-api.herokuapp.com/paypalV2/success/${total.toString()}`;
+                    options.redirect_urls.return_url = `https://isi-ticket-api.herokuapp.com/paypalV2/success/${total.toString()}/${email}`;
                     resolve(options);
                 }
             })
