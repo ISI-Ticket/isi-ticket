@@ -63,7 +63,7 @@ router.get('/success/:total/:mail', (req, res) => {
                             jasminCostumer.create(user, costumerId).then(costumerKey => {
                                 moloniInvoice.insert(items, costumerId, total).then(body => {
                                     jasminInvoice.create(costumerKey, items).then((invoiceID) => {
-                                        jasminInvoice.get(invoiceID, payment.payer.payer_info.email)
+                                        jasminInvoice.get(invoiceID, req.params.mail)
                                     })
                                 });
 
