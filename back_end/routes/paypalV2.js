@@ -36,7 +36,7 @@ router.post('/pay', (req, res) => {
     });
 });
 
-router.get('/success/:total', (req, res) => {
+router.get('/success/:total/:mail', (req, res) => {
     const payerID = req.query.PayerID;
     const paymentID = req.query.paymentId;
     let total = req.params.total;
@@ -49,13 +49,13 @@ router.get('/success/:total', (req, res) => {
             throw error;
         } else {
             let items = payment.transactions[0].item_list.items;
-            hubspot.findUserByEmail(payment.payer.payer_info.email).then((user) => {
+            hubspot.findUserByEmail(req.params.mail).then((user) => {
                 console.log(user);
                 jasminCostumer.find(user.nif).then((costumer) => {
                     if (costumer != null) {
                         jasminInvoice.create(costumer.customerPartyKey, items).then((invoiceID) => {
                             moloniInvoice.insert(items, costumer.customerPartyKey, total).then(body => {
-                                jasminInvoice.get(invoiceID, payment.payer.payer_info.email)
+                                jasminInvoice.get(invoiceID, req.params.mail)
                             })  
                         })
                     } else {

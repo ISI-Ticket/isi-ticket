@@ -28,20 +28,21 @@ function prepareResponse(rows){
                 data.push(ticket);
                 break;
             case 2:
-                ticket.ticketName = "Senha completa";  
+                ticket.ticketName = "Senha normal";  
                 ticket.description = "Refeição, bebida (água ou sumo) e sobremesa";
                 data.push(ticket);
                 break;
             case 3:
                 ticket.ticketName = "Senha grill";  
-                ticket.description = "Descrição por definir";
+                ticket.description = "Menu composto por: pão, sopa, prato, bebida (água ou sumo) e sobremesa";
                 data.push(ticket);
                 break;
             case 4:
                 ticket.ticketName = "Senha rampa B";  
-                ticket.description = "Descrição por definir";
+                ticket.description = "Refeição composta por: Pão, sopa, prato, sobremesa, água/sumo";
                 data.push(ticket);
-                break;    
+                break;
+                
           }
     }
     return data;
