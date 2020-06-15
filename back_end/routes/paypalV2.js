@@ -153,7 +153,7 @@ function cycle(cart) {
                 itemsFinal.push(itemObj);
                 break;
             case '5':
-                itemObj.name = "Pack senhas completas";
+                itemObj.name = "Pack de senhas completas";
                 itemObj.sku = "005";
                 itemObj.price = "26.50"
                 itemObj.currency = "EUR";
@@ -162,7 +162,7 @@ function cycle(cart) {
                 itemsFinal.push(itemObj);
                 break;
             case '6':
-                itemObj.name = "Pack senhas simples";
+                itemObj.name = "Pack de senhas simples";
                 itemObj.sku = "006";
                 itemObj.price = "18.00"
                 itemObj.currency = "EUR";
