@@ -162,7 +162,7 @@ function cycle(cart) {
                 itemsFinal.push(itemObj);
                 break;
             case '6':
-                itemObj.name = "Pack de senhas simples";
+                itemObj.name = "Pack de senhas Simples";
                 itemObj.sku = "006";
                 itemObj.price = "18.00"
                 itemObj.currency = "EUR";
